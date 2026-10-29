@@ -4523,5 +4523,13 @@
     "room_tone": "Duraklamaları oda sesiyle doldur",
     "room_tone_note": "[pause] işaretleri ve sesli kitap boşlukları dijital sessizlik yerine kaydın kendi sessiz arka planını alır; böylece ses satırlar arasında kesilmez.",
     "env_pinned": "{{env}} tarafından belirlendi. Bu anahtarı kullanmak için değiştirin veya temizleyin."
+  },
+  "entraSignIn": {
+    "title": "Oturum açmak gerekiyor",
+    "description": "Devam etmek için kuruluşunuzun Microsoft hesabıyla oturum açın.",
+    "button": "Microsoft ile oturum aç",
+    "redirecting": "Microsoft’a yönlendiriliyorsunuz…",
+    "failed": "Oturum açma tamamlanmadı. Lütfen tekrar deneyin.",
+    "denied": "Hesabınızın bu uygulamayı kullanma izni yok. Bir yöneticiden erişim isteyin."
   }
 }

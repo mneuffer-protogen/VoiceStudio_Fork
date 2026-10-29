@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import logging
 import math
+import secrets
 import threading
 import time
 from collections import OrderedDict, deque
@@ -11,9 +13,10 @@ from datetime import UTC, datetime
 from typing import Literal
 
 from fastapi import APIRouter, HTTPException, Request, Response
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from pydantic import BaseModel
 
+from core import entra
 from core.auth import (
     CredentialTransport,
     PrincipalKind,
@@ -22,7 +25,9 @@ from core.auth import (
     master_header_valid,
     principal_for,
     remote_api_key,
+    session_binding,
 )
+from core.browser_guard import reject_cross_site_get
 from core.csrf import cookie_csrf_allowed, effective_scheme
 from services.admin_sessions import (
     SESSION_TTL_SECONDS,
@@ -32,6 +37,7 @@ from services.admin_sessions import (
 
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
+logger = logging.getLogger(__name__)
 
 _FAILED_EXCHANGE_LIMIT = 10
 _FAILED_EXCHANGE_WINDOW_SECONDS = 60
@@ -186,6 +192,91 @@ def create_session(payload: SessionRequest, request: Request) -> Response:
     return response
 
 
+@router.get("/config")
+def auth_config() -> dict[str, bool]:
+    """Which sign-in the login screen should offer. Public, secret-free."""
+    return {"entra": entra.entra_configured()}
+
+
+def _expire_flow_cookie(response: Response, request: Request) -> None:
+    response.delete_cookie(
+        entra.FLOW_COOKIE,
+        path="/api/auth/entra",
+        secure=_secure_cookie(request),
+        httponly=True,
+        samesite="lax",
+    )
+
+
+def _entra_failure(request: Request, reason: str) -> RedirectResponse:
+    # The SPA turns ``auth_error`` into a localized message; nothing from
+    # Microsoft's error text is echoed to the browser.
+    response = RedirectResponse(f"/?auth_error={reason}", status_code=302)
+    _expire_flow_cookie(response, request)
+    return response
+
+
+@router.get("/entra/login")
+def entra_login(request: Request) -> Response:
+    reject_cross_site_get(request)
+    config = entra.load_config()
+    if config is None:
+        raise HTTPException(status_code=404, detail="Not found")
+    flow = entra.flow_store.start()
+    response = RedirectResponse(entra.authorize_url(config, flow), status_code=302)
+    # Lax, not Strict: the browser must send this back on the top-level
+    # navigation that returns from Microsoft. It binds the callback to the
+    # browser that started the sign-in, so a planted link cannot log a victim
+    # into someone else's session.
+    response.set_cookie(
+        entra.FLOW_COOKIE,
+        flow.state,
+        max_age=entra.FLOW_TTL_SECONDS,
+        path="/api/auth/entra",
+        secure=_secure_cookie(request),
+        httponly=True,
+        samesite="lax",
+    )
+    return response
+
+
+@router.get("/entra/callback")
+async def entra_callback(
+    request: Request,
+    code: str | None = None,
+    state: str | None = None,
+    error: str | None = None,
+) -> Response:
+    config = entra.load_config()
+    if config is None:
+        raise HTTPException(status_code=404, detail="Not found")
+    flow = entra.flow_store.consume(state)
+    cookie = request.cookies.get(entra.FLOW_COOKIE, "")
+    if flow is None or not cookie or not secrets.compare_digest(cookie, flow.state):
+        return _entra_failure(request, "failed")
+    if error or not code:
+        logger.info("Entra sign-in not completed: %r", (error or "no code")[:64])
+        return _entra_failure(request, "failed")
+    try:
+        id_token = await entra.redeem_code(config, code, flow)
+        claims = entra.validate_id_token(config, id_token, flow)
+    except entra.EntraError as exc:
+        logger.warning("Entra sign-in rejected: %s", exc)
+        return _entra_failure(request, "failed")
+    if not entra.is_allowed(config, claims):
+        logger.warning("Entra sign-in denied for a user outside the allow-list")
+        return _entra_failure(request, "denied")
+
+    binding = session_binding()
+    assert binding is not None  # Entra is configured, so a binding exists
+    issued = admin_session_store.issue(binding)
+    logger.info("Entra sign-in accepted for oid %s", str(claims.get("oid"))[:36])
+    response = RedirectResponse("/", status_code=302)
+    _set_session_cookie(response, request, issued.token, issued.expires_at)
+    _expire_flow_cookie(response, request)
+    return response
+
+
 @router.delete("/session", status_code=204)
 def delete_session(request: Request) -> Response:
     principal = principal_for(request)
@@ -215,7 +306,7 @@ def create_ws_ticket(payload: WebSocketTicketRequest, request: Request) -> JSONR
         ticket = admin_session_store.issue_ws_ticket_for_credential(
             principal.credential_id,
             payload.path,
-            remote_api_key(),
+            session_binding(),
         )
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from None

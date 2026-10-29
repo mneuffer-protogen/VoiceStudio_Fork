@@ -4523,5 +4523,13 @@
     "room_tone": "Pauzes vullen met ruimtetoon",
     "room_tone_note": "[pause]-markeringen en luisterboekpauzes krijgen de stille achtergrond van de opname zelf in plaats van digitale stilte, zodat het geluid tussen regels niet wegvalt.",
     "env_pinned": "Ingesteld door {{env}}. Wijzig of wis het om deze schakelaar te gebruiken."
+  },
+  "entraSignIn": {
+    "title": "Inloggen vereist",
+    "description": "Log in met het Microsoft-account van je organisatie om verder te gaan.",
+    "button": "Inloggen met Microsoft",
+    "redirecting": "Je wordt doorgestuurd naar Microsoft…",
+    "failed": "Inloggen is niet voltooid. Probeer het opnieuw.",
+    "denied": "Je account mag deze app niet gebruiken. Vraag een beheerder om toegang."
   }
 }

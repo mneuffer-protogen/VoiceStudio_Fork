@@ -25,6 +25,9 @@ DELETE /profiles/{profile_id}/consent
 DELETE /projects/{project_id}
 DELETE /pronunciation/{entry_id}
 GET /.well-known/voicestudio-speech
+GET /api/auth/config
+GET /api/auth/entra/callback
+GET /api/auth/entra/login
 GET /api/cloud-sync/devices
 GET /api/cloud-sync/local
 GET /api/cloud-sync/local/keys
