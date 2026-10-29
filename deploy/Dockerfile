@@ -195,8 +195,7 @@ EXPOSE 3900
 HEALTHCHECK --interval=30s --timeout=5s --start-period=120s --retries=5 \
   CMD ["python3", "backend/docker_entrypoint.py", "--health-check"]
 
-# Mount points for persistent data (sqlite db, user voices, huggingface cache)
-VOLUME ["/app/omnivoice_data"]
+# Persistent data at /app/omnivoice_data is provided by a Railway Volume (VOLUME is not supported on Railway).
 
 # Bind to 0.0.0.0 for external access. The entrypoint reads the manifest default
 # (or OMNIVOICE_PORT) and forwards any explicit Uvicorn options after the image.
