@@ -4531,5 +4531,10 @@
     "redirecting": "Mengalihkan Anda ke Microsoft…",
     "failed": "Proses masuk tidak selesai. Silakan coba lagi.",
     "denied": "Akun Anda tidak diizinkan menggunakan aplikasi ini. Minta akses kepada administrator."
+  },
+  "commercialNotice": {
+    "title": "Hanya untuk penggunaan nonkomersial",
+    "body": "VoiceStudio tidak untuk penggunaan komersial. Harap jangan gunakan aplikasi ini untuk tujuan komersial. Pilih \"Saya setuju\" untuk mengonfirmasi dan melanjutkan.",
+    "agree": "Saya setuju"
   }
 }

@@ -4533,5 +4533,10 @@
     "redirecting": "Redirecionando você para a Microsoft…",
     "failed": "O início de sessão não foi concluído. Tente novamente.",
     "denied": "Sua conta não tem permissão para usar este aplicativo. Peça acesso a um administrador."
+  },
+  "commercialNotice": {
+    "title": "Apenas para uso não comercial",
+    "body": "O VoiceStudio não é para uso comercial. Não use este aplicativo para fins comerciais. Selecione \"Concordo\" para confirmar e continuar.",
+    "agree": "Concordo"
   }
 }

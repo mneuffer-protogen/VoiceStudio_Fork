@@ -4531,5 +4531,10 @@
     "redirecting": "Redirecting you to Microsoft…",
     "failed": "Sign-in didn't complete. Please try again.",
     "denied": "Your account isn't allowed to use this app. Ask an administrator for access."
+  },
+  "commercialNotice": {
+    "title": "Non-commercial use only",
+    "body": "VoiceStudio is not for commercial use. Please do not use this app for commercial purposes. Select \"I agree\" to confirm and continue.",
+    "agree": "I agree"
   }
 }

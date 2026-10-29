@@ -4559,5 +4559,10 @@
     "redirecting": "Przekierowywanie do Microsoft…",
     "failed": "Logowanie nie zostało ukończone. Spróbuj ponownie.",
     "denied": "Twoje konto nie ma uprawnień do korzystania z tej aplikacji. Poproś administratora o dostęp."
+  },
+  "commercialNotice": {
+    "title": "Tylko do użytku niekomercyjnego",
+    "body": "VoiceStudio nie jest przeznaczone do użytku komercyjnego. Nie używaj tej aplikacji do celów komercyjnych. Wybierz „Zgadzam się”, aby potwierdzić i kontynuować.",
+    "agree": "Zgadzam się"
   }
 }

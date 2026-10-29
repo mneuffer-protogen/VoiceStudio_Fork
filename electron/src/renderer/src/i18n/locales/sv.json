@@ -4531,5 +4531,10 @@
     "redirecting": "Skickar dig vidare till Microsoft…",
     "failed": "Inloggningen slutfördes inte. Försök igen.",
     "denied": "Ditt konto får inte använda den här appen. Be en administratör om åtkomst."
+  },
+  "commercialNotice": {
+    "title": "Endast för icke-kommersiell användning",
+    "body": "VoiceStudio är inte till för kommersiellt bruk. Använd inte den här appen i kommersiellt syfte. Välj \"Jag godkänner\" för att bekräfta och fortsätta.",
+    "agree": "Jag godkänner"
   }
 }

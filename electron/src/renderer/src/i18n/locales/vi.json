@@ -4531,5 +4531,10 @@
     "redirecting": "Đang chuyển bạn đến Microsoft…",
     "failed": "Đăng nhập chưa hoàn tất. Vui lòng thử lại.",
     "denied": "Tài khoản của bạn không được phép dùng ứng dụng này. Hãy nhờ quản trị viên cấp quyền truy cập."
+  },
+  "commercialNotice": {
+    "title": "Chỉ dùng cho mục đích phi thương mại",
+    "body": "VoiceStudio không dành cho mục đích thương mại. Vui lòng không sử dụng ứng dụng này cho mục đích thương mại. Chọn \"Tôi đồng ý\" để xác nhận và tiếp tục.",
+    "agree": "Tôi đồng ý"
   }
 }

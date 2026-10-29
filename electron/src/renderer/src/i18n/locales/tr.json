@@ -4531,5 +4531,10 @@
     "redirecting": "Microsoft’a yönlendiriliyorsunuz…",
     "failed": "Oturum açma tamamlanmadı. Lütfen tekrar deneyin.",
     "denied": "Hesabınızın bu uygulamayı kullanma izni yok. Bir yöneticiden erişim isteyin."
+  },
+  "commercialNotice": {
+    "title": "Yalnızca ticari olmayan kullanım için",
+    "body": "VoiceStudio ticari kullanım için değildir. Lütfen bu uygulamayı ticari amaçlarla kullanmayın. Onaylayıp devam etmek için \"Kabul ediyorum\" seçeneğini seçin.",
+    "agree": "Kabul ediyorum"
   }
 }

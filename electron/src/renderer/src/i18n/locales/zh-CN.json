@@ -4531,5 +4531,10 @@
     "redirecting": "正在将您重定向到 Microsoft…",
     "failed": "登录未完成，请重试。",
     "denied": "您的账户无权使用此应用。请向管理员申请访问权限。"
+  },
+  "commercialNotice": {
+    "title": "仅限非商业用途",
+    "body": "VoiceStudio 不得用于商业用途。请勿将此应用用于商业目的。选择“我同意”以确认并继续。",
+    "agree": "我同意"
   }
 }

@@ -4531,5 +4531,10 @@
     "redirecting": "Je wordt doorgestuurd naar Microsoft…",
     "failed": "Inloggen is niet voltooid. Probeer het opnieuw.",
     "denied": "Je account mag deze app niet gebruiken. Vraag een beheerder om toegang."
+  },
+  "commercialNotice": {
+    "title": "Alleen voor niet-commercieel gebruik",
+    "body": "VoiceStudio is niet bedoeld voor commercieel gebruik. Gebruik deze app niet voor commerciële doeleinden. Kies \"Ik ga akkoord\" om te bevestigen en door te gaan.",
+    "agree": "Ik ga akkoord"
   }
 }

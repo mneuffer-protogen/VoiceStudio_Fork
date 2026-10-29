@@ -4533,5 +4533,10 @@
     "redirecting": "Redirection vers Microsoft…",
     "failed": "La connexion n'a pas abouti. Veuillez réessayer.",
     "denied": "Votre compte n'est pas autorisé à utiliser cette application. Demandez l'accès à un administrateur."
+  },
+  "commercialNotice": {
+    "title": "Usage non commercial uniquement",
+    "body": "VoiceStudio n'est pas destiné à un usage commercial. N'utilisez pas cette application à des fins commerciales. Sélectionnez « J'accepte » pour confirmer et continuer.",
+    "agree": "J'accepte"
   }
 }
