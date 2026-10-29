@@ -24,10 +24,10 @@ from fastapi import HTTPException, Request
 from core.auth import (
     CredentialTransport,
     PrincipalKind,
+    admin_auth_configured,
     is_local_host,
     is_loopback,
     principal_for,
-    remote_api_key,
 )
 from core.browser_guard import reject_cross_site_get
 from core.csrf import SAFE_HTTP_METHODS, cookie_csrf_allowed
@@ -81,7 +81,7 @@ def _admin_credential_configured(request) -> bool:
     opted out of bare-server discovery. Remote admin then remains closed until
     they configure and present the long API key.
     """
-    if remote_api_key():
+    if admin_auth_configured():
         return True
     return bool(_configured_pin(request))
 
@@ -201,7 +201,7 @@ def _admin_gate_403() -> None:
         status_code=403,
         detail=(
             "loopback origin or admin API key required"
-            if _server_mode() and remote_api_key()
+            if _server_mode() and admin_auth_configured()
             else "loopback origin required"
         ),
     )

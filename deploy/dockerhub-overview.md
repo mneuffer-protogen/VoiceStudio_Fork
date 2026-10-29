@@ -189,7 +189,10 @@ adds there are root-owned).
   URL imports refuse private-network addresses unless
   `-e OMNIVOICE_ALLOW_PRIVATE_URL_IMPORTS=1` is set.
 - For LAN or internet-facing deployments, set a long random
-  `OMNIVOICE_API_KEY` and pass the same key through the browser's login prompt.
+  `OMNIVOICE_API_KEY` and pass the same key through the browser's login prompt,
+  or sign browser users in with Microsoft Entra instead (the key then stays for
+  scripts only; see the
+  [Entra setup](https://github.com/debpalash/VoiceStudio/blob/main/docs/api-auth.md#microsoft-entra-sign-in-web-ui)).
   A six-digit share PIN is also available for casual LAN access, but it does
   not authorize administration or dictation; see the
   [API authentication guide](https://github.com/debpalash/VoiceStudio/blob/main/docs/api-auth.md).

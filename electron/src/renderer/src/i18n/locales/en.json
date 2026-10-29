@@ -4523,5 +4523,13 @@
     "room_tone": "Fill pauses with room tone",
     "room_tone_note": "[pause] markers and audiobook gaps get the take's own quiet background instead of digital silence, so the sound doesn't cut out between lines.",
     "env_pinned": "Set by {{env}}. Change or clear it to use this switch."
+  },
+  "entraSignIn": {
+    "title": "Sign in required",
+    "description": "Sign in with your organization's Microsoft account to continue.",
+    "button": "Sign in with Microsoft",
+    "redirecting": "Redirecting you to Microsoft…",
+    "failed": "Sign-in didn't complete. Please try again.",
+    "denied": "Your account isn't allowed to use this app. Ask an administrator for access."
   }
 }

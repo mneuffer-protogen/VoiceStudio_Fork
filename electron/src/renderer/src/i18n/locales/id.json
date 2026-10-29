@@ -4523,5 +4523,13 @@
     "room_tone": "Isi jeda dengan nada ruangan",
     "room_tone_note": "Penanda [pause] dan jeda buku audio mendapat latar senyap dari rekaman itu sendiri, bukan keheningan digital, sehingga suara tidak terputus di antara baris.",
     "env_pinned": "Ditetapkan oleh {{env}}. Ubah atau hapus untuk memakai sakelar ini."
+  },
+  "entraSignIn": {
+    "title": "Perlu masuk",
+    "description": "Masuk dengan akun Microsoft organisasi Anda untuk melanjutkan.",
+    "button": "Masuk dengan Microsoft",
+    "redirecting": "Mengalihkan Anda ke Microsoft…",
+    "failed": "Proses masuk tidak selesai. Silakan coba lagi.",
+    "denied": "Akun Anda tidak diizinkan menggunakan aplikasi ini. Minta akses kepada administrator."
   }
 }

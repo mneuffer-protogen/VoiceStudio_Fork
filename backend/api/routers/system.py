@@ -14,6 +14,7 @@ from services import network_share
 from services import tailscale as _tailscale
 from api.schemas import SysinfoResponse, SystemInfoResponse, ModelStatusResponse
 from api.dependencies import is_loopback, require_admin, require_admin_action
+from core.auth import admin_auth_configured
 from fastapi.responses import FileResponse, StreamingResponse
 import torch
 import shutil
@@ -1586,9 +1587,7 @@ async def network_state(request: Request):
     # loopback UI or to a remote caller that already passed the configured
     # long API-key gate. The boolean lets headless dashboards remain useful.
     host = request.client.host if request.client else None
-    may_reveal_pin = is_loopback(host) or bool(
-        os.environ.get("OMNIVOICE_API_KEY", "").strip()
-    )
+    may_reveal_pin = is_loopback(host) or admin_auth_configured()
     return {
         "enabled": st.enabled,
         "share_port": st.share_port,

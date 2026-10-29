@@ -15,6 +15,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass, field
 from enum import Enum
 
+from core import entra
 from services.admin_sessions import (
     AdminSessionStore,
 )
@@ -69,6 +70,20 @@ class _CredentialCandidate:
 def remote_api_key() -> str | None:
     """Normalized remote operator key, read dynamically for rotation support."""
     return os.environ.get("OMNIVOICE_API_KEY", "").strip() or None
+
+
+def session_binding() -> str | None:
+    """What the session store ties sessions to: the API key, else the Entra app.
+
+    Rotating either drops every session. Only the API key itself is ever
+    accepted as a durable bearer credential; this is just the store's key.
+    """
+    return remote_api_key() or entra.session_binding()
+
+
+def admin_auth_configured() -> bool:
+    """Whether remote clients must authenticate (API key or Entra sign-in)."""
+    return session_binding() is not None
 
 
 def credential_matches(supplied: str | None, configured: str | None) -> bool:
@@ -437,7 +452,7 @@ def _candidate_principal(
             transport=candidate.transport,
         )
     elif candidate.allow_session:
-        session = store.resolve(candidate.value, configured_key)
+        session = store.resolve(candidate.value, session_binding())
         if session is not None:
             principal = AuthPrincipal(
                 PrincipalKind.ADMIN_SESSION,
@@ -449,7 +464,7 @@ def _candidate_principal(
         session = store.consume_ws_ticket(
             candidate.value,
             _canonical_websocket_path(connection),
-            configured_key,
+            session_binding(),
         )
         if session is not None:
             principal = AuthPrincipal(

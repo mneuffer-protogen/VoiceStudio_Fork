@@ -513,6 +513,12 @@ hard rules from the first prompt.
     hands out. Turning either off stops every request at once; switching
     account features off sends one best-effort token revocation. Hidden in
     packaged builds until VoiceStudio Cloud launches.
+  - **Microsoft Entra sign-in, only when the operator configures it** (the
+    `OMNIVOICE_ENTRA_*` variables in `docs/api-auth.md`; off by default, never
+    on the desktop app): the user's browser is sent to
+    `login.microsoftonline.com`, and the backend redeems the sign-in code at
+    that tenant's token endpoint (`backend/core/entra.py`). Nothing is sent
+    about recordings, projects or models.
   - Bug reports as prefilled GitHub Issue URLs opened in the user's browser.
   - **Phone content reports, only when the user taps Send** in a generated
     result's Report sheet: `appapi.voicestudio.sh/v1/content-reports` with the

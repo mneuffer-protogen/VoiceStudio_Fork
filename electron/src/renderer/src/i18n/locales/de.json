@@ -4523,5 +4523,13 @@
     "room_tone": "Pausen mit Raumklang füllen",
     "room_tone_note": "[pause]-Marker und Hörbuch-Lücken erhalten den leisen Hintergrund der Aufnahme statt digitaler Stille, damit der Klang zwischen den Zeilen nicht abbricht.",
     "env_pinned": "Durch {{env}} festgelegt. Ändere oder entferne den Wert, um diesen Schalter zu nutzen."
+  },
+  "entraSignIn": {
+    "title": "Anmeldung erforderlich",
+    "description": "Melde dich mit dem Microsoft-Konto deiner Organisation an, um fortzufahren.",
+    "button": "Mit Microsoft anmelden",
+    "redirecting": "Du wirst zu Microsoft weitergeleitet…",
+    "failed": "Die Anmeldung wurde nicht abgeschlossen. Bitte versuche es erneut.",
+    "denied": "Dein Konto darf diese App nicht verwenden. Bitte einen Administrator um Zugriff."
   }
 }

@@ -205,6 +205,40 @@ Cookie-authenticated mutations require both an exact allowed `Origin` and
 browser's `Sec-Fetch-Site: same-origin`. Bearer/header clients are not subject
 to the ambient-cookie CSRF check.
 
+### Microsoft Entra sign-in (web UI)
+
+A browser deployment can sign users in with Microsoft Entra ID instead of the
+API-key prompt. It is **off unless you set every variable below**; nothing
+contacts Microsoft otherwise, and the desktop app is unaffected.
+
+| Variable | Value |
+|---|---|
+| `OMNIVOICE_ENTRA_TENANT_ID` | Directory (tenant) ID, a GUID. `common`, `organizations` and domain names are refused, so only your tenant can sign in. |
+| `OMNIVOICE_ENTRA_CLIENT_ID` | Application (client) ID of your app registration. |
+| `OMNIVOICE_ENTRA_CLIENT_SECRET` | A client secret for that registration. |
+| `OMNIVOICE_PUBLIC_URL` | The deployment's public `https://` origin, for example `https://voice.example.com`. |
+| `OMNIVOICE_ENTRA_ALLOWED_USERS` | Optional. Comma-separated object IDs, e-mail addresses or UPNs. When set, only these users get in. |
+
+In Entra, register a **Web** app with the redirect URI
+`<OMNIVOICE_PUBLIC_URL>/api/auth/entra/callback`. Turn on **Assignment required**
+for the enterprise application to limit access to assigned users and groups
+without an allow-list; with neither, every user in the tenant is admitted, and
+each one becomes an administrator of the deployment.
+
+The login screen sends the browser to Microsoft (authorization code with PKCE),
+checks the returned ID token's issuer, tenant, audience, nonce and expiry, and
+then issues the same eight-hour `ov_session` cookie as the API-key exchange.
+Microsoft keeps its own single sign-on session, so after the cookie expires or
+the server restarts the page redirects through Microsoft and returns signed in
+without typing anything. A failed or refused sign-in returns to the page with a
+message and no automatic retry.
+
+The API key keeps working as a bearer credential for scripts, the MCP shim and
+desktop-to-remote connections; the web UI no longer asks for it when Entra is
+configured. Changing the tenant or client ID signs every user out. Entra counts
+as a configured credential for the gates above: remote clients must sign in,
+and the admin routes accept an Entra session as they accept an API-key session.
+
 ---
 
 ## Dictation WebSocket

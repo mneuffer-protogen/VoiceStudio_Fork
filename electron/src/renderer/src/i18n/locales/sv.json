@@ -4523,5 +4523,13 @@
     "room_tone": "Fyll pauser med rumston",
     "room_tone_note": "[pause]-markörer och luckor i ljudböcker får tagningens egen tysta bakgrund i stället för digital tystnad, så att ljudet inte bryts mellan raderna.",
     "env_pinned": "Styrs av {{env}}. Ändra eller rensa den för att använda det här reglaget."
+  },
+  "entraSignIn": {
+    "title": "Inloggning krävs",
+    "description": "Logga in med din organisations Microsoft-konto för att fortsätta.",
+    "button": "Logga in med Microsoft",
+    "redirecting": "Skickar dig vidare till Microsoft…",
+    "failed": "Inloggningen slutfördes inte. Försök igen.",
+    "denied": "Ditt konto får inte använda den här appen. Be en administratör om åtkomst."
   }
 }

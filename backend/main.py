@@ -407,11 +407,11 @@ model_loads_reset_shutdown = None
 from core.auth import (
     CredentialTransport,
     PrincipalKind,
+    admin_auth_configured,
     credential_matches,
     is_local_host,
     is_trusted_host_loopback,
     principal_for,
-    remote_api_key,
 )
 from core.csrf import SAFE_HTTP_METHODS, cookie_csrf_allowed, origin_allowed
 
@@ -1744,6 +1744,8 @@ def _is_public_path(path: str) -> bool:
         or path.startswith("/assets/")
         or path.startswith("/favicon")
         or path == "/api/auth/session"
+        or path == "/api/auth/config"
+        or path.startswith("/api/auth/entra/")
     )
 
 # Paths that answer while deferred startup is still running. The shutdown
@@ -1894,15 +1896,15 @@ def _backend_marker_value() -> str:
 
 
 class BearerKeyMiddleware:
-    """When OMNIVOICE_API_KEY is set, non-loopback clients must present it on
-    every HTTP + WebSocket request. Durable API-key transports remain compatible;
+    """When OMNIVOICE_API_KEY is set (or Entra sign-in is configured),
+    non-loopback clients must authenticate on every HTTP + WebSocket request. Durable API-key transports remain compatible;
     the first-party UI may instead present a short-lived admin session. The
     middleware never reflects a presented master key into browser state.
 
     Loopback always bypasses — the desktop default is unchanged — and the SPA
     shell paths stay reachable so a remote UI can load and show what's wrong.
 
-    Inert when the env var is unset (the default). Pure ASGI for the same
+    Inert when neither is configured (the default). Pure ASGI for the same
     no-buffering reason as NetworkAccessMiddleware above. Plain-HTTP caveat
     is documented in docs/remote-gpu.md: the key is sniffable outside a
     WireGuard (Tailscale) or TLS (tailscale serve) transport.
@@ -1914,8 +1916,7 @@ class BearerKeyMiddleware:
     async def __call__(self, scope, receive, send):
         if scope["type"] not in ("http", "websocket"):
             return await self.app(scope, receive, send)
-        key = remote_api_key() or ""
-        if not key:
+        if not admin_auth_configured():
             return await self.app(scope, receive, send)
         if scope["type"] == "http" and _is_public_path(scope.get("path", "")):
             return await self.app(scope, receive, send)

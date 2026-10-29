@@ -4523,5 +4523,13 @@
     "room_tone": "Encher as pausas co ton da sala",
     "room_tone_note": "Os marcadores [pause] e os ocos dos audiolibros reciben o fondo tranquilo da propia toma en vez de silencio dixital, para que o son non se corte entre liñas.",
     "env_pinned": "Defíneo {{env}}. Cámbiao ou bórrao para usar este interruptor."
+  },
+  "entraSignIn": {
+    "title": "Requírese iniciar sesión",
+    "description": "Inicia sesión coa conta de Microsoft da túa organización para continuar.",
+    "button": "Iniciar sesión con Microsoft",
+    "redirecting": "Redirixíndote a Microsoft…",
+    "failed": "Non se completou o inicio de sesión. Téntao de novo.",
+    "denied": "A túa conta non ten permiso para usar esta aplicación. Pide acceso a un administrador."
   }
 }
