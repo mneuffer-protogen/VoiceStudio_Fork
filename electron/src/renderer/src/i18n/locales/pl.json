@@ -4552,6 +4552,14 @@
     "room_tone_note": "Znaczniki [pause] i przerwy w audiobookach dostają ciche tło samego nagrania zamiast cyfrowej ciszy, więc dźwięk nie urywa się między wersami.",
     "env_pinned": "Ustawione przez {{env}}. Zmień lub usuń tę wartość, aby użyć tego przełącznika."
   },
+  "entraSignIn": {
+    "title": "Wymagane logowanie",
+    "description": "Zaloguj się kontem Microsoft swojej organizacji, aby kontynuować.",
+    "button": "Zaloguj się przez Microsoft",
+    "redirecting": "Przekierowywanie do Microsoft…",
+    "failed": "Logowanie nie zostało ukończone. Spróbuj ponownie.",
+    "denied": "Twoje konto nie ma uprawnień do korzystania z tej aplikacji. Poproś administratora o dostęp."
+  },
   "commercialNotice": {
     "title": "Tylko do użytku niekomercyjnego",
     "body": "VoiceStudio nie jest przeznaczone do użytku komercyjnego. Nie używaj tej aplikacji do celów komercyjnych. Wybierz „Zgadzam się”, aby potwierdzić i kontynuować.",

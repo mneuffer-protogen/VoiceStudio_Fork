@@ -4524,6 +4524,14 @@
     "room_tone_note": "[pause] 标记和有声书间隔会使用该录音自身的安静背景音，而不是数字静音，句子之间的声音不会突然中断。",
     "env_pinned": "由 {{env}} 设置。修改或清除它后才能使用此开关。"
   },
+  "entraSignIn": {
+    "title": "需要登录",
+    "description": "请使用您所在组织的 Microsoft 账户登录以继续。",
+    "button": "使用 Microsoft 登录",
+    "redirecting": "正在将您重定向到 Microsoft…",
+    "failed": "登录未完成，请重试。",
+    "denied": "您的账户无权使用此应用。请向管理员申请访问权限。"
+  },
   "commercialNotice": {
     "title": "仅限非商业用途",
     "body": "VoiceStudio 不得用于商业用途。请勿将此应用用于商业目的。选择“我同意”以确认并继续。",

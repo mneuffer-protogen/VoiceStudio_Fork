@@ -259,12 +259,17 @@ def _network_authorized_only(connection) -> bool:
     remote deployments behind arbitrary names keep working with their
     credentials.
     """
-    from core.auth import PrincipalKind, presents_valid_credential, principal_for, remote_api_key
+    from core.auth import (
+        PrincipalKind,
+        admin_auth_configured,
+        presents_valid_credential,
+        principal_for,
+    )
 
     kind = principal_for(connection).kind
     if kind in {PrincipalKind.LOOPBACK, PrincipalKind.TRUSTED_NETWORK}:
         return not presents_valid_credential(connection)
-    return kind == PrincipalKind.ANONYMOUS and not remote_api_key()
+    return kind == PrincipalKind.ANONYMOUS and not admin_auth_configured()
 
 
 class BrowserGuardMiddleware:

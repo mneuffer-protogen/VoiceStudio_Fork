@@ -6154,6 +6154,130 @@
     ]
    }
   },
+  "/api/auth/config": {
+   "get": {
+    "description": "Which sign-in the login screen should offer. Public, secret-free.",
+    "operationId": "auth_config_api_auth_config_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": {
+          "type": "boolean"
+         },
+         "title": "Response Auth Config Api Auth Config Get",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Auth Config",
+    "tags": [
+     "auth"
+    ]
+   }
+  },
+  "/api/auth/entra/callback": {
+   "get": {
+    "operationId": "entra_callback_api_auth_entra_callback_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "code",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Code"
+      }
+     },
+     {
+      "in": "query",
+      "name": "state",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "State"
+      }
+     },
+     {
+      "in": "query",
+      "name": "error",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Error"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Entra Callback",
+    "tags": [
+     "auth"
+    ]
+   }
+  },
+  "/api/auth/entra/login": {
+   "get": {
+    "operationId": "entra_login_api_auth_entra_login_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Entra Login",
+    "tags": [
+     "auth"
+    ]
+   }
+  },
   "/api/auth/session": {
    "delete": {
     "operationId": "delete_session_api_auth_session_delete",

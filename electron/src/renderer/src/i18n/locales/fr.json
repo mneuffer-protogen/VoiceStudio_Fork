@@ -4526,6 +4526,14 @@
     "room_tone_note": "Les marqueurs [pause] et les blancs des livres audio reçoivent le fond calme de la prise au lieu d'un silence numérique, pour que le son ne se coupe pas entre les lignes.",
     "env_pinned": "Défini par {{env}}. Modifiez-le ou supprimez-le pour utiliser cet interrupteur."
   },
+  "entraSignIn": {
+    "title": "Connexion requise",
+    "description": "Connectez-vous avec le compte Microsoft de votre organisation pour continuer.",
+    "button": "Se connecter avec Microsoft",
+    "redirecting": "Redirection vers Microsoft…",
+    "failed": "La connexion n'a pas abouti. Veuillez réessayer.",
+    "denied": "Votre compte n'est pas autorisé à utiliser cette application. Demandez l'accès à un administrateur."
+  },
   "commercialNotice": {
     "title": "Usage non commercial uniquement",
     "body": "VoiceStudio n'est pas destiné à un usage commercial. N'utilisez pas cette application à des fins commerciales. Sélectionnez « J'accepte » pour confirmer et continuer.",

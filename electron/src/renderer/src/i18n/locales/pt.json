@@ -4526,6 +4526,14 @@
     "room_tone_note": "Os marcadores [pause] e os intervalos dos audiolivros recebem o fundo silencioso da própria gravação em vez de silêncio digital, para que o som não corte entre as linhas.",
     "env_pinned": "Definido por {{env}}. Altere ou limpe-o para usar este botão."
   },
+  "entraSignIn": {
+    "title": "É necessário iniciar sessão",
+    "description": "Inicie sessão com a conta Microsoft da sua organização para continuar.",
+    "button": "Iniciar sessão com a Microsoft",
+    "redirecting": "Redirecionando você para a Microsoft…",
+    "failed": "O início de sessão não foi concluído. Tente novamente.",
+    "denied": "Sua conta não tem permissão para usar este aplicativo. Peça acesso a um administrador."
+  },
   "commercialNotice": {
     "title": "Apenas para uso não comercial",
     "body": "O VoiceStudio não é para uso comercial. Não use este aplicativo para fins comerciais. Selecione \"Concordo\" para confirmar e continuar.",

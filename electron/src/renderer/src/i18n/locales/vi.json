@@ -4524,6 +4524,14 @@
     "room_tone_note": "Dấu [pause] và các khoảng trống trong sách nói sẽ có nền yên tĩnh của chính bản thu thay vì im lặng kỹ thuật số, để âm thanh không bị ngắt giữa các dòng.",
     "env_pinned": "Được đặt bởi {{env}}. Hãy đổi hoặc xóa để dùng công tắc này."
   },
+  "entraSignIn": {
+    "title": "Cần đăng nhập",
+    "description": "Đăng nhập bằng tài khoản Microsoft của tổ chức bạn để tiếp tục.",
+    "button": "Đăng nhập bằng Microsoft",
+    "redirecting": "Đang chuyển bạn đến Microsoft…",
+    "failed": "Đăng nhập chưa hoàn tất. Vui lòng thử lại.",
+    "denied": "Tài khoản của bạn không được phép dùng ứng dụng này. Hãy nhờ quản trị viên cấp quyền truy cập."
+  },
   "commercialNotice": {
     "title": "Chỉ dùng cho mục đích phi thương mại",
     "body": "VoiceStudio không dành cho mục đích thương mại. Vui lòng không sử dụng ứng dụng này cho mục đích thương mại. Chọn \"Tôi đồng ý\" để xác nhận và tiếp tục.",

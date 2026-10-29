@@ -4526,6 +4526,14 @@
     "room_tone_note": "Los marcadores [pause] y los huecos de los audiolibros reciben el fondo silencioso de la propia toma en lugar de silencio digital, para que el sonido no se corte entre líneas.",
     "env_pinned": "Lo fija {{env}}. Cámbialo o bórralo para usar este interruptor."
   },
+  "entraSignIn": {
+    "title": "Se requiere iniciar sesión",
+    "description": "Inicia sesión con la cuenta de Microsoft de tu organización para continuar.",
+    "button": "Iniciar sesión con Microsoft",
+    "redirecting": "Redirigiéndote a Microsoft…",
+    "failed": "No se completó el inicio de sesión. Inténtalo de nuevo.",
+    "denied": "Tu cuenta no tiene permiso para usar esta aplicación. Pide acceso a un administrador."
+  },
   "commercialNotice": {
     "title": "Solo para uso no comercial",
     "body": "VoiceStudio no es para uso comercial. No uses esta aplicación con fines comerciales. Selecciona \"Acepto\" para confirmar y continuar.",
