@@ -4551,5 +4551,10 @@
     "room_tone": "Wypełniaj pauzy tłem pomieszczenia",
     "room_tone_note": "Znaczniki [pause] i przerwy w audiobookach dostają ciche tło samego nagrania zamiast cyfrowej ciszy, więc dźwięk nie urywa się między wersami.",
     "env_pinned": "Ustawione przez {{env}}. Zmień lub usuń tę wartość, aby użyć tego przełącznika."
+  },
+  "commercialNotice": {
+    "title": "Tylko do użytku niekomercyjnego",
+    "body": "VoiceStudio nie jest przeznaczone do użytku komercyjnego. Nie używaj tej aplikacji do celów komercyjnych. Wybierz „Zgadzam się”, aby potwierdzić i kontynuować.",
+    "agree": "Zgadzam się"
   }
 }

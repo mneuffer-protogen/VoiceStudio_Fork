@@ -4523,5 +4523,10 @@
     "room_tone": "Fyll pauser med rumston",
     "room_tone_note": "[pause]-markörer och luckor i ljudböcker får tagningens egen tysta bakgrund i stället för digital tystnad, så att ljudet inte bryts mellan raderna.",
     "env_pinned": "Styrs av {{env}}. Ändra eller rensa den för att använda det här reglaget."
+  },
+  "commercialNotice": {
+    "title": "Endast för icke-kommersiell användning",
+    "body": "VoiceStudio är inte till för kommersiellt bruk. Använd inte den här appen i kommersiellt syfte. Välj \"Jag godkänner\" för att bekräfta och fortsätta.",
+    "agree": "Jag godkänner"
   }
 }

@@ -4523,5 +4523,10 @@
     "room_tone": "Fill pauses with room tone",
     "room_tone_note": "[pause] markers and audiobook gaps get the take's own quiet background instead of digital silence, so the sound doesn't cut out between lines.",
     "env_pinned": "Set by {{env}}. Change or clear it to use this switch."
+  },
+  "commercialNotice": {
+    "title": "Non-commercial use only",
+    "body": "VoiceStudio is not for commercial use. Please do not use this app for commercial purposes. Select \"I agree\" to confirm and continue.",
+    "agree": "I agree"
   }
 }

@@ -4525,5 +4525,10 @@
     "room_tone": "Preencher pausas com tom de sala",
     "room_tone_note": "Os marcadores [pause] e os intervalos dos audiolivros recebem o fundo silencioso da própria gravação em vez de silêncio digital, para que o som não corte entre as linhas.",
     "env_pinned": "Definido por {{env}}. Altere ou limpe-o para usar este botão."
+  },
+  "commercialNotice": {
+    "title": "Apenas para uso não comercial",
+    "body": "O VoiceStudio não é para uso comercial. Não use este aplicativo para fins comerciais. Selecione \"Concordo\" para confirmar e continuar.",
+    "agree": "Concordo"
   }
 }

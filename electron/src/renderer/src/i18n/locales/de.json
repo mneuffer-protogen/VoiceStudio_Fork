@@ -4523,5 +4523,10 @@
     "room_tone": "Pausen mit Raumklang füllen",
     "room_tone_note": "[pause]-Marker und Hörbuch-Lücken erhalten den leisen Hintergrund der Aufnahme statt digitaler Stille, damit der Klang zwischen den Zeilen nicht abbricht.",
     "env_pinned": "Durch {{env}} festgelegt. Ändere oder entferne den Wert, um diesen Schalter zu nutzen."
+  },
+  "commercialNotice": {
+    "title": "Nur für nichtkommerzielle Nutzung",
+    "body": "VoiceStudio ist nicht für die kommerzielle Nutzung gedacht. Bitte verwende diese App nicht für kommerzielle Zwecke. Wähle „Ich stimme zu“, um zu bestätigen und fortzufahren.",
+    "agree": "Ich stimme zu"
   }
 }

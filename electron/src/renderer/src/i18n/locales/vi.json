@@ -4523,5 +4523,10 @@
     "room_tone": "Lấp khoảng dừng bằng âm nền phòng",
     "room_tone_note": "Dấu [pause] và các khoảng trống trong sách nói sẽ có nền yên tĩnh của chính bản thu thay vì im lặng kỹ thuật số, để âm thanh không bị ngắt giữa các dòng.",
     "env_pinned": "Được đặt bởi {{env}}. Hãy đổi hoặc xóa để dùng công tắc này."
+  },
+  "commercialNotice": {
+    "title": "Chỉ dùng cho mục đích phi thương mại",
+    "body": "VoiceStudio không dành cho mục đích thương mại. Vui lòng không sử dụng ứng dụng này cho mục đích thương mại. Chọn \"Tôi đồng ý\" để xác nhận và tiếp tục.",
+    "agree": "Tôi đồng ý"
   }
 }

@@ -4523,5 +4523,10 @@
     "room_tone": "Isi jeda dengan nada ruangan",
     "room_tone_note": "Penanda [pause] dan jeda buku audio mendapat latar senyap dari rekaman itu sendiri, bukan keheningan digital, sehingga suara tidak terputus di antara baris.",
     "env_pinned": "Ditetapkan oleh {{env}}. Ubah atau hapus untuk memakai sakelar ini."
+  },
+  "commercialNotice": {
+    "title": "Hanya untuk penggunaan nonkomersial",
+    "body": "VoiceStudio tidak untuk penggunaan komersial. Harap jangan gunakan aplikasi ini untuk tujuan komersial. Pilih \"Saya setuju\" untuk mengonfirmasi dan melanjutkan.",
+    "agree": "Saya setuju"
   }
 }
