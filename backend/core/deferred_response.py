@@ -27,8 +27,10 @@ from dataclasses import dataclass, field
 
 logger = logging.getLogger("omnivoice.deferred")
 
-#: Routes that accept ``Prefer: respond-async``.
-DEFERRABLE_PATHS = frozenset({"/generate"})
+#: Routes that accept ``Prefer: respond-async``. ``/v1/audio/speech`` lets API
+#: clients (e.g. bulk narration) avoid Railway's 5-minute idle cut on long CPU
+#: renders; they poll ``/generate/result/{id}`` like the app does.
+DEFERRABLE_PATHS = frozenset({"/generate", "/v1/audio/speech"})
 RESULT_PREFIX = "/generate/result/"
 #: Finished results are dropped this long after they finish, fetched or not.
 RESULT_TTL_S = 3600.0
