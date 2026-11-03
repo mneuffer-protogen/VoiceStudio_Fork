@@ -519,6 +519,11 @@ hard rules from the first prompt.
     `login.microsoftonline.com`, and the backend redeems the sign-in code at
     that tenant's token endpoint (`backend/core/entra.py`). Nothing is sent
     about recordings, projects or models.
+  - **Scale-to-zero keep-alive, only when the operator configures it**
+    (`OMNIVOICE_KEEPALIVE_URL` in `docs/install/docker.md`; off by default,
+    never on the desktop app): while work is in progress the backend sends a
+    small GET to that URL, normally the deployment's own `/health`
+    (`backend/core/busy_keepalive.py`). The request carries no data.
   - Bug reports as prefilled GitHub Issue URLs opened in the user's browser.
   - **Phone content reports, only when the user taps Send** in a generated
     result's Report sheet: `appapi.voicestudio.sh/v1/content-reports` with the

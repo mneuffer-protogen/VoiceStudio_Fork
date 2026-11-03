@@ -1235,6 +1235,11 @@ async def _phase_b(app: FastAPI) -> None:
             logger.exception("cloud sync did not start")
 
     app.state.cloud_sync_task = asyncio.create_task(_start_cloud_sync())
+    # Opt-in (OMNIVOICE_KEEPALIVE_URL): keep a scale-to-zero host such as
+    # Railway Serverless awake while work is in progress. None when unset.
+    from core.busy_keepalive import start_keepalive
+
+    app.state.keepalive_task = start_keepalive()
     if mcp_mounted:
         logger.info("MCP server mounted at /mcp")
     # Phone calls (opt-in): the separate loopback telephony listener resumes
@@ -1415,6 +1420,7 @@ async def lifespan(app: FastAPI):
         getattr(app.state, "preload_task", None),
         getattr(app.state, "capture_preload_task", None),
         getattr(app.state, "watermark_preload_task", None),
+        getattr(app.state, "keepalive_task", None),
         timeout=20.0,
     )
     # The watermark warm-up runs on its dedicated 1-worker pool. Cancellation
@@ -1982,6 +1988,9 @@ _allowed = allowed_origin_values()
 # the two probe paths until the deferred startup completes (and is a no-op
 # forever after).
 from core.render_trace import RenderTraceMiddleware
+from core.busy_keepalive import InFlightRequestsMiddleware
+# Counts in-flight requests for the opt-in scale-to-zero keep-alive.
+app.add_middleware(InFlightRequestsMiddleware)
 app.add_middleware(RenderTraceMiddleware)
 app.add_middleware(StartupGateMiddleware)
 

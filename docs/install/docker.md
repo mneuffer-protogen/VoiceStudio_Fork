@@ -451,6 +451,22 @@ Everything else is unchanged:
 > this behind a reverse proxy on the host unless that proxy is listed in
 > `FORWARDED_ALLOW_IPS`.
 
+## Hosts that sleep when idle (Railway Serverless and similar)
+
+Scale-to-zero hosts such as Railway Serverless put a container to sleep after
+a few minutes without **outbound** network traffic. They do not see in-flight
+requests or queued jobs, so a long CPU render or a queued dub can be put to
+sleep before it finishes. Set:
+
+| Variable | Default | Effect |
+|----------|---------|--------|
+| `OMNIVOICE_KEEPALIVE_URL` | unset (off) | While a request is in flight or a job is running or queued, the backend sends a small GET to this URL. Point it at the deployment's own health check, e.g. `https://<your-host>/health`. When everything is idle the pings stop and the host can sleep. |
+| `OMNIVOICE_KEEPALIVE_INTERVAL_S` | `60` | Seconds between pings while busy (minimum 10). Keep it well under the host's idle window (5 minutes on Railway). |
+
+Waking from sleep is still a cold start: the first request after idle can get
+a 502/503 while the container boots and then waits for the model to load, so
+API clients should retry once on 502/503.
+
 ## Volume mounts
 
 Persist one path across container restarts:
