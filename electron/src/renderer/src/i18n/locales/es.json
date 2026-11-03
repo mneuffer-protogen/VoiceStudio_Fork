@@ -2382,7 +2382,8 @@
     "design": "Diseño de voz",
     "clone": "Clonación de voz",
     "primary": "Navegación principal",
-    "calls": "Llamadas"
+    "calls": "Llamadas",
+    "queue": "Cola"
   },
   "profiles": {
     "locked": "¡Voz bloqueada! La identidad ahora es consistente en todas las generaciones.",
@@ -4538,5 +4539,36 @@
     "title": "Solo para uso no comercial",
     "body": "VoiceStudio no es para uso comercial. No uses esta aplicación con fines comerciales. Selecciona \"Acepto\" para confirmar y continuar.",
     "agree": "Acepto"
+  },
+  "queue": {
+    "title": "Cola",
+    "summary": "En curso: {{running}} · En espera: {{waiting}} · Procesos: {{workers}}",
+    "loading": "Cargando la cola…",
+    "running": "En curso",
+    "waiting": "En espera",
+    "recent": "Recientes",
+    "none_running": "No hay nada en curso.",
+    "none_waiting": "No hay nada en espera.",
+    "none_recent": "Todavía no hay trabajos terminados.",
+    "steps": "Pasos: {{n}}",
+    "voice": "Voz: {{voice}}",
+    "chars": "Caracteres: {{n}}",
+    "client": "Desde {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "App",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "Segundo plano",
+    "state_starting": "Iniciando",
+    "state_waiting": "En espera",
+    "state_running": "En curso",
+    "state_done": "Hecho",
+    "state_failed": "Error",
+    "estimate_basis": "Estimado a partir de trabajos similares terminados: {{n}}",
+    "estimate_first": "Primera estimación: aún no ha terminado ningún trabajo similar",
+    "starts_in": "empieza en ~{{time}}",
+    "takes_about": "tarda ~{{time}}",
+    "elapsed": "{{time}} transcurrido",
+    "remaining": "quedan ~{{time}}"
   }
 }

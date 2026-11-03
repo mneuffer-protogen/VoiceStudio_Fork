@@ -2382,7 +2382,8 @@
     "design": "Conception vocale",
     "clone": "Clonage vocal",
     "primary": "Navigation principale",
-    "calls": "Appels"
+    "calls": "Appels",
+    "queue": "File d’attente"
   },
   "profiles": {
     "locked": "Voix verrouillée ! L’identité est désormais cohérente à travers toutes les générations.",
@@ -4538,5 +4539,36 @@
     "title": "Usage non commercial uniquement",
     "body": "VoiceStudio n'est pas destiné à un usage commercial. N'utilisez pas cette application à des fins commerciales. Sélectionnez « J'accepte » pour confirmer et continuer.",
     "agree": "J'accepte"
+  },
+  "queue": {
+    "title": "File d’attente",
+    "summary": "En cours : {{running}} · En attente : {{waiting}} · Processus : {{workers}}",
+    "loading": "Chargement de la file…",
+    "running": "En cours",
+    "waiting": "En attente",
+    "recent": "Récents",
+    "none_running": "Rien n’est en cours.",
+    "none_waiting": "Rien n’est en attente.",
+    "none_recent": "Aucun travail terminé pour l’instant.",
+    "steps": "Étapes : {{n}}",
+    "voice": "Voix : {{voice}}",
+    "chars": "Caractères : {{n}}",
+    "client": "Depuis {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "App",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "Arrière-plan",
+    "state_starting": "Démarrage",
+    "state_waiting": "En attente",
+    "state_running": "En cours",
+    "state_done": "Terminé",
+    "state_failed": "Échec",
+    "estimate_basis": "Estimé à partir de travaux similaires terminés : {{n}}",
+    "estimate_first": "Première estimation : aucun travail similaire terminé pour l’instant",
+    "starts_in": "démarre dans ~{{time}}",
+    "takes_about": "dure ~{{time}}",
+    "elapsed": "{{time}} écoulé",
+    "remaining": "encore ~{{time}}"
   }
 }

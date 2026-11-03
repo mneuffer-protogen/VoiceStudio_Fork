@@ -2380,7 +2380,8 @@
     "design": "Sprachdesign",
     "clone": "Stimmklonen",
     "primary": "Hauptnavigation",
-    "calls": "Anrufe"
+    "calls": "Anrufe",
+    "queue": "Warteschlange"
   },
   "profiles": {
     "locked": "Stimme gesperrt! Die Identität ist nun über alle Generationen hinweg einheitlich.",
@@ -4536,5 +4537,36 @@
     "title": "Nur für nichtkommerzielle Nutzung",
     "body": "VoiceStudio ist nicht für die kommerzielle Nutzung gedacht. Bitte verwende diese App nicht für kommerzielle Zwecke. Wähle „Ich stimme zu“, um zu bestätigen und fortzufahren.",
     "agree": "Ich stimme zu"
+  },
+  "queue": {
+    "title": "Warteschlange",
+    "summary": "Läuft: {{running}} · Wartet: {{waiting}} · Worker: {{workers}}",
+    "loading": "Warteschlange wird geladen…",
+    "running": "Läuft",
+    "waiting": "Wartet",
+    "recent": "Zuletzt",
+    "none_running": "Es läuft nichts.",
+    "none_waiting": "Es wartet nichts.",
+    "none_recent": "Noch keine abgeschlossene Arbeit.",
+    "steps": "Schritte: {{n}}",
+    "voice": "Stimme: {{voice}}",
+    "chars": "Zeichen: {{n}}",
+    "client": "Von {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "App",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "Hintergrund",
+    "state_starting": "Startet",
+    "state_waiting": "Wartet",
+    "state_running": "Läuft",
+    "state_done": "Fertig",
+    "state_failed": "Fehlgeschlagen",
+    "estimate_basis": "Geschätzt aus ähnlichen abgeschlossenen Aufträgen: {{n}}",
+    "estimate_first": "Erste Schätzung: noch keine ähnlichen Aufträge abgeschlossen",
+    "starts_in": "startet in ~{{time}}",
+    "takes_about": "dauert ~{{time}}",
+    "elapsed": "{{time}} vergangen",
+    "remaining": "noch ~{{time}}"
   }
 }

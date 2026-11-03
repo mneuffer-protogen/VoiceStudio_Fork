@@ -2380,7 +2380,8 @@
     "clone": "Nhân bản giọng nói",
     "primary": "Điều hướng chính",
     "dictation": "Nhập liệu bằng giọng nói",
-    "calls": "Cuộc gọi"
+    "calls": "Cuộc gọi",
+    "queue": "Hàng đợi"
   },
   "profiles": {
     "locked": "Giọng nói bị khóa! Bản sắc bây giờ nhất quán qua tất cả các thế hệ.",
@@ -4536,5 +4537,36 @@
     "title": "Chỉ dùng cho mục đích phi thương mại",
     "body": "VoiceStudio không dành cho mục đích thương mại. Vui lòng không sử dụng ứng dụng này cho mục đích thương mại. Chọn \"Tôi đồng ý\" để xác nhận và tiếp tục.",
     "agree": "Tôi đồng ý"
+  },
+  "queue": {
+    "title": "Hàng đợi",
+    "summary": "Đang chạy: {{running}} · Đang chờ: {{waiting}} · Tiến trình: {{workers}}",
+    "loading": "Đang tải hàng đợi…",
+    "running": "Đang chạy",
+    "waiting": "Đang chờ",
+    "recent": "Gần đây",
+    "none_running": "Không có gì đang chạy.",
+    "none_waiting": "Không có gì đang chờ.",
+    "none_recent": "Chưa có công việc nào hoàn tất.",
+    "steps": "Bước: {{n}}",
+    "voice": "Giọng: {{voice}}",
+    "chars": "Ký tự: {{n}}",
+    "client": "Từ {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "Ứng dụng",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "Nền",
+    "state_starting": "Đang bắt đầu",
+    "state_waiting": "Đang chờ",
+    "state_running": "Đang chạy",
+    "state_done": "Xong",
+    "state_failed": "Thất bại",
+    "estimate_basis": "Ước tính từ các công việc tương tự đã xong: {{n}}",
+    "estimate_first": "Ước tính đầu tiên: chưa có công việc tương tự nào hoàn tất",
+    "starts_in": "bắt đầu sau ~{{time}}",
+    "takes_about": "mất ~{{time}}",
+    "elapsed": "đã qua {{time}}",
+    "remaining": "còn ~{{time}}"
   }
 }

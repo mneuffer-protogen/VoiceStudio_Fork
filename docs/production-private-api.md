@@ -127,6 +127,14 @@ More SDK and authentication examples are in [API authentication](api-auth.md).
   service readiness.
 - Keep request concurrency bounded. A capacity response is a backpressure
   signal; honor `Retry-After` instead of starting parallel retries.
+- Watch the queue on the app's **Queue** page, or with admin-gated
+  `GET /queue`. It lists what is running, what is waiting for the inference
+  worker (with its position), and the last 50 finished or failed requests.
+  Each entry shows where it came from (`app`, `api`, `mcp` or `background`),
+  the client address, the route, and the engine, steps, voice and character
+  count. Time estimates are learned from finished jobs on this host and
+  get more precise as similar jobs complete. They are kept in
+  `omnivoice_data/queue_estimates.json`, and deleting that file resets them.
 - Drain callers, recreate the container with a newly pinned tag, run the engine
   checks, then restore traffic. Do not update model/runtime dependencies inside
   a running production container.

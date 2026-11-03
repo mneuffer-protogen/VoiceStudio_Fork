@@ -32,6 +32,7 @@ import {
   HomeIcon,
   LayersIcon,
   LibraryIcon,
+  ListOrderedIcon,
   MicIcon,
   MoonIcon,
   PhoneCallIcon,
@@ -219,6 +220,14 @@ export function CommandPalette() {
       icon: WrenchIcon,
       keywords: ['tools', 'compare', 'convert'],
       run: () => navigate({ to: '/tools' }),
+    },
+    {
+      id: 'queue',
+      label: t('nav.queue'),
+      group: workspaceGroup,
+      icon: ListOrderedIcon,
+      keywords: ['queue', 'jobs', 'running', 'waiting', 'api'],
+      run: () => navigate({ to: '/queue' }),
     },
     {
       id: 'integrations',

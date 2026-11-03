@@ -2380,7 +2380,8 @@
     "dictation": "听写",
     "calls": "通话",
     "batch_dub": "批量配音",
-    "design": "声音设计"
+    "design": "声音设计",
+    "queue": "队列"
   },
   "compare": {
     "title": "A/B 语音比较",
@@ -4536,5 +4537,36 @@
     "title": "仅限非商业用途",
     "body": "VoiceStudio 不得用于商业用途。请勿将此应用用于商业目的。选择“我同意”以确认并继续。",
     "agree": "我同意"
+  },
+  "queue": {
+    "title": "队列",
+    "summary": "运行中: {{running}} · 等待中: {{waiting}} · 工作进程: {{workers}}",
+    "loading": "正在加载队列…",
+    "running": "运行中",
+    "waiting": "等待中",
+    "recent": "最近",
+    "none_running": "没有正在运行的任务。",
+    "none_waiting": "没有等待中的任务。",
+    "none_recent": "还没有已完成的任务。",
+    "steps": "步数: {{n}}",
+    "voice": "声音: {{voice}}",
+    "chars": "字符数: {{n}}",
+    "client": "来自 {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "应用",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "后台",
+    "state_starting": "正在启动",
+    "state_waiting": "等待中",
+    "state_running": "运行中",
+    "state_done": "完成",
+    "state_failed": "失败",
+    "estimate_basis": "根据类似的已完成任务估算: {{n}}",
+    "estimate_first": "首次估算: 还没有类似任务完成",
+    "starts_in": "约 {{time}} 后开始",
+    "takes_about": "约需 {{time}}",
+    "elapsed": "已用 {{time}}",
+    "remaining": "剩余约 {{time}}"
   }
 }

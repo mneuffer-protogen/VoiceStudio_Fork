@@ -341,7 +341,8 @@
     "gallery": "Galería",
     "batch_dub": "Dobraxe por lotes",
     "transcribe": "Transcribe",
-    "calls": "Chamadas"
+    "calls": "Chamadas",
+    "queue": "Cola"
   },
   "backend": {
     "starting": "Iniciando o motor local…",
@@ -4536,5 +4537,36 @@
     "title": "Só para uso non comercial",
     "body": "VoiceStudio non é para uso comercial. Non uses esta aplicación con fins comerciais. Selecciona \"Acepto\" para confirmar e continuar.",
     "agree": "Acepto"
+  },
+  "queue": {
+    "title": "Cola",
+    "summary": "En curso: {{running}} · Á espera: {{waiting}} · Procesos: {{workers}}",
+    "loading": "Cargando a cola…",
+    "running": "En curso",
+    "waiting": "Á espera",
+    "recent": "Recentes",
+    "none_running": "Non hai nada en curso.",
+    "none_waiting": "Non hai nada á espera.",
+    "none_recent": "Aínda non hai traballos rematados.",
+    "steps": "Pasos: {{n}}",
+    "voice": "Voz: {{voice}}",
+    "chars": "Caracteres: {{n}}",
+    "client": "Desde {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "App",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "Segundo plano",
+    "state_starting": "Iniciando",
+    "state_waiting": "Á espera",
+    "state_running": "En curso",
+    "state_done": "Feito",
+    "state_failed": "Erro",
+    "estimate_basis": "Estimado a partir de traballos semellantes rematados: {{n}}",
+    "estimate_first": "Primeira estimación: aínda non rematou ningún traballo semellante",
+    "starts_in": "comeza en ~{{time}}",
+    "takes_about": "leva ~{{time}}",
+    "elapsed": "{{time}} transcorrido",
+    "remaining": "quedan ~{{time}}"
   }
 }

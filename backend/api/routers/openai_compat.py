@@ -655,6 +655,14 @@ async def create_speech(req: SpeechRequest):
     except ModelLicenceNotAccepted as exc:
         # OpenAI's error shape; `detail` keeps the models for VoiceStudio clients.
         raise OpenAIError(403, exc.detail(), param="model", code=exc.detail()["code"]) from exc
+    # Queue page: what predicts how long this request will run.
+    from core.activity import annotate as _annotate_activity
+
+    _annotate_activity(
+        kind="tts", engine=getattr(backend, "id", None) or req.model,
+        chars=len(req.input or ""),
+        voice=req.voice if isinstance(req.voice, str) and req.voice else "custom",
+    )
 
     # Compressed formats need ffmpeg: fail fast, before any model load or GPU
     # work, and never fall back to a body that doesn't match the format.

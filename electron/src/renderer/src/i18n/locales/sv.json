@@ -2380,7 +2380,8 @@
     "design": "Röstdesign",
     "clone": "Röstkloning",
     "primary": "Huvudnavigering",
-    "calls": "Samtal"
+    "calls": "Samtal",
+    "queue": "Kö"
   },
   "profiles": {
     "locked": "Rösten låst! Identiteten är nu konsekvent över alla generationer.",
@@ -4536,5 +4537,36 @@
     "title": "Endast för icke-kommersiell användning",
     "body": "VoiceStudio är inte till för kommersiellt bruk. Använd inte den här appen i kommersiellt syfte. Välj \"Jag godkänner\" för att bekräfta och fortsätta.",
     "agree": "Jag godkänner"
+  },
+  "queue": {
+    "title": "Kö",
+    "summary": "Körs: {{running}} · Väntar: {{waiting}} · Arbetare: {{workers}}",
+    "loading": "Läser in kön…",
+    "running": "Körs",
+    "waiting": "Väntar",
+    "recent": "Senaste",
+    "none_running": "Inget körs.",
+    "none_waiting": "Inget väntar.",
+    "none_recent": "Inget avslutat arbete ännu.",
+    "steps": "Steg: {{n}}",
+    "voice": "Röst: {{voice}}",
+    "chars": "Tecken: {{n}}",
+    "client": "Från {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "App",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "Bakgrund",
+    "state_starting": "Startar",
+    "state_waiting": "Väntar",
+    "state_running": "Körs",
+    "state_done": "Klar",
+    "state_failed": "Misslyckades",
+    "estimate_basis": "Uppskattat från liknande avslutade jobb: {{n}}",
+    "estimate_first": "Första uppskattning: inga liknande jobb har avslutats ännu",
+    "starts_in": "startar om ~{{time}}",
+    "takes_about": "tar ~{{time}}",
+    "elapsed": "{{time}} har gått",
+    "remaining": "~{{time}} kvar"
   }
 }

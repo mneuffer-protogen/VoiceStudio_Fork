@@ -805,6 +805,7 @@ def _phase_a_build_inner() -> None:
         media_tools as media_tools_router,  # Audio tools: ffmpeg/ffprobe/yt-dlp
         auth as auth_router,
         voice_convert,  # Studio Convert: speech-to-speech via ASR → TTS
+        queue as queue_router,  # Queue page: running / waiting work and estimates
     )
     from api.routers import mcp_bindings as _mcp_bindings_router  # noqa: E402
     from api.routers import telephony_twilio as _telephony_twilio_router  # noqa: E402
@@ -819,6 +820,7 @@ def _phase_a_build_inner() -> None:
         audiobook, longform_jobs, pronunciation, settings_router,
         media_tools_router, auth_router, _mcp_bindings_router,
         _telephony_twilio_router, _calls_router, _cloud_sync_router,
+        queue_router,
     ])
     # Download-acceleration state, once, for triage-from-logs (FDL-03).
     try:
@@ -1992,6 +1994,10 @@ _allowed = allowed_origin_values()
 # forever after).
 from core.render_trace import RenderTraceMiddleware
 from core.busy_keepalive import InFlightRequestsMiddleware
+from core.activity import ActivityMiddleware
+# Innermost: opens a Queue-page activity per state-changing request (also for
+# deferred /generate, whose background run passes through here).
+app.add_middleware(ActivityMiddleware)
 # Counts in-flight requests for the opt-in scale-to-zero keep-alive.
 app.add_middleware(InFlightRequestsMiddleware)
 app.add_middleware(RenderTraceMiddleware)
