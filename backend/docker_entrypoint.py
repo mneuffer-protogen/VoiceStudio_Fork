@@ -8,6 +8,7 @@ from collections.abc import Sequence
 from http.client import HTTPConnection
 from pathlib import Path
 
+from core.container_limits import apply_thread_limits
 from services.network_share import backend_port
 
 _PROC_ROOT = Path("/proc")
@@ -76,6 +77,12 @@ def main() -> None:
         return
     port = effective_port(supplied)
     os.environ["OMNIVOICE_PORT"] = str(port)
+    # Before uvicorn imports torch, so OpenMP/MKL size their pools to the
+    # container's CPU quota rather than every host core; engine child
+    # processes inherit the variables.
+    threads = apply_thread_limits()
+    if threads:
+        print(f"Container CPU quota detected: native thread pools capped at {threads}", flush=True)
     os.execv(sys.executable, [sys.executable, *uvicorn_arguments(supplied, port)])
 
 

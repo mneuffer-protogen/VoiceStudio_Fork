@@ -79,7 +79,10 @@ def _cpu_thread_count() -> int:
         cores = psutil.cpu_count(logical=False)
     except (ImportError, OSError):
         cores = None
-    return min(16, max(1, cores or os.cpu_count() or 1))
+    from core.container_limits import effective_cpu_count
+
+    # Never more than the container's CPU quota (physical count is host-wide).
+    return min(16, effective_cpu_count(), max(1, cores or effective_cpu_count()))
 
 
 def _device_min_vram_gb(device) -> float:

@@ -1114,10 +1114,10 @@ def _env_summary() -> str:
         pass
     lines.append(f"Python:  {sys.version.split()[0]}")
     try:
-        import psutil  # already a runtime dep
+        from core.container_limits import effective_cpu_count, virtual_memory
 
-        vm = psutil.virtual_memory()
-        lines.append(f"CPU:     {os.cpu_count()} cores")
+        vm = virtual_memory()
+        lines.append(f"CPU:     {effective_cpu_count()} cores")
         lines.append(f"RAM:     {round(vm.total / 1024 ** 3, 1)} GB")
     except Exception:
         # Best-effort — omit CPU/RAM if psutil is unavailable or probing fails.

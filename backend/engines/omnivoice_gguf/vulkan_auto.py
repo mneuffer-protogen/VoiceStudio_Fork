@@ -129,9 +129,9 @@ class VulkanProfile:
 def system_ram_gb() -> float:
     """Total physical RAM in GiB; 0.0 when it cannot be read."""
     try:
-        import psutil
+        from core.container_limits import virtual_memory
 
-        return round(psutil.virtual_memory().total / _GIB, 2)
+        return round(virtual_memory().total / _GIB, 2)
     except Exception:  # noqa: BLE001
         return 0.0
 

@@ -468,8 +468,8 @@ def _network_check() -> dict:
 
 def _ram_gb() -> float:
     try:
-        import psutil
-        return psutil.virtual_memory().total / (1024 ** 3)
+        from core.container_limits import virtual_memory
+        return virtual_memory().total / (1024 ** 3)
     except Exception:
         return 0.0
 

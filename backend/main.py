@@ -10,6 +10,11 @@ _backend_dir = os.path.dirname(os.path.abspath(__file__))
 if _backend_dir not in sys.path:
     sys.path.insert(0, _backend_dir)
 
+from core.container_limits import apply_thread_limits  # noqa: E402
+
+# Cap OpenMP/MKL thread pools to a container CPU quota before anything can
+# import torch or numpy (no-op on hosts without a cgroup quota).
+apply_thread_limits()
 from core.crash_diagnostics import enable_fault_handler  # noqa: E402
 from core.app_config import PRODUCT_NAME  # noqa: E402
 # Arm native-crash tracebacks before model or GPU libraries can be imported.
@@ -476,8 +481,8 @@ def _capture_preload_ram_ok(min_free_bytes: int = 4 * 1024**3) -> bool:
     background load never pushes a small machine into swap. If free memory
     can't be measured, warm anyway (the load path has its own error handling)."""
     try:
-        import psutil
-        return psutil.virtual_memory().available >= min_free_bytes
+        from core.container_limits import virtual_memory
+        return virtual_memory().available >= min_free_bytes
     except Exception:
         return True
 

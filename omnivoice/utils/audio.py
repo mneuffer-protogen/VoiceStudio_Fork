@@ -137,7 +137,11 @@ def _allocatable_bytes() -> Optional[int]:
     try:
         import psutil
 
-        free = int(psutil.virtual_memory().available)
+        try:  # container-aware when running under the VoiceStudio backend
+            from core.container_limits import virtual_memory
+        except ImportError:
+            virtual_memory = psutil.virtual_memory
+        free = int(virtual_memory().available)
         try:
             free += int(psutil.swap_memory().free)
         except Exception:  # noqa: BLE001 — swap unknown: physical RAM alone
