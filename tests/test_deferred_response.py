@@ -110,6 +110,19 @@ def test_delete_cancels_the_render_and_forgets_the_job():
     assert asyncio.run(run()) == (200, True, 404)
 
 
+def test_openai_speech_is_deferrable_and_polls_the_shared_result_route():
+    async def run():
+        app = dr.DeferredResponseMiddleware(_route)
+        status, _h, body = await _call(app, "POST", "/v1/audio/speech", b"hi", ASYNC)
+        assert status == 202
+        job_id = json.loads(body)["job_id"]
+        await asyncio.sleep(0.1)
+        return await _call(app, "GET", f"/generate/result/{job_id}")
+
+    status, headers, body = asyncio.run(run())
+    assert (status, body, headers[b"x-audio-id"]) == (200, b"RIFFhi!", b"take-1")
+
+
 def test_only_generate_is_deferrable():
     async def run():
         app = dr.DeferredResponseMiddleware(_route)
