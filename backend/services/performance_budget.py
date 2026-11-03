@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import os
+from core.container_limits import effective_cpu_count
 
 TIERS = ("fast", "balanced", "quality", "max")
 PRIORITY = ("tts", "asr", "translation", "dictation", "diarisation", "llm")
@@ -36,7 +37,7 @@ def hardware_snapshot() -> dict:
         "ram_gb": memory.get("ram_total_gb"),
         # MPS shares RAM; counting its reported VRAM again invents capacity.
         "vram_gb": caps.vram_gb if caps.family in {"cuda", "rocm", "xpu"} else None,
-        "cpu_threads": os.cpu_count() or 1,
+        "cpu_threads": effective_cpu_count(),
         "probe_ok": caps.probe_ok,
     }
 

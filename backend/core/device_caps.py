@@ -742,8 +742,8 @@ def _probe() -> HostCaps:
                 device_name = "Apple Silicon (MPS)"
             if not vram_gb:
                 try:
-                    import psutil
-                    vram_gb = float(psutil.virtual_memory().total) / (1024 ** 3) / 2
+                    from core.container_limits import virtual_memory
+                    vram_gb = float(virtual_memory().total) / (1024 ** 3) / 2
                 except Exception:
                     notes.append("psutil unavailable; MPS VRAM unknown")
     except Exception:

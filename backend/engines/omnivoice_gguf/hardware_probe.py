@@ -110,10 +110,10 @@ def detect_capabilities() -> HardwareCapabilities:
         )
 
     if torch.backends.mps.is_available():
-        # Lazy psutil import — only Apple Silicon hosts pay this cost.
-        import psutil
+        # Lazy import — only Apple Silicon hosts pay this cost.
+        from core.container_limits import virtual_memory
 
-        ram_mb = int(psutil.virtual_memory().total // (1024 * 1024))
+        ram_mb = int(virtual_memory().total // (1024 * 1024))
         vram_mb = ram_mb // 2  # unified-memory ceiling
         return HardwareCapabilities(
             backend="mps",

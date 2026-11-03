@@ -33,6 +33,8 @@ sys.path.insert(0, os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "backend"
 ))
 
+from core import container_limits  # noqa: E402 — needs backend/ on sys.path
+
 
 @pytest.fixture
 def sd():
@@ -161,7 +163,7 @@ def test_a_heavy_model_actually_reaches_the_larger_thread_count(monkeypatch, sd)
     value on a host with cores to spare (CodeRabbit, #1399).
     """
     monkeypatch.delenv("OMNIVOICE_SHERPA_ASR_THREADS", raising=False)
-    monkeypatch.setattr(os, "cpu_count", lambda: 8)
+    monkeypatch.setattr(container_limits, "effective_cpu_count", lambda: 8)
     heavy = [m for m in sd._MODELS.values() if m.heavy]
     assert heavy, "no model is marked heavy"
     for spec in heavy:
@@ -169,7 +171,7 @@ def test_a_heavy_model_actually_reaches_the_larger_thread_count(monkeypatch, sd)
 
 
 def test_the_thread_bump_never_exceeds_the_host_core_count(monkeypatch, sd):
-    monkeypatch.setattr(os, "cpu_count", lambda: 2)
+    monkeypatch.setattr(container_limits, "effective_cpu_count", lambda: 2)
     heavy = next(m for m in sd._MODELS.values() if m.heavy)
     assert sd._threads_for(heavy) <= 2
 
@@ -177,7 +179,7 @@ def test_the_thread_bump_never_exceeds_the_host_core_count(monkeypatch, sd):
 def test_a_single_core_host_still_gets_the_base_default(monkeypatch, sd):
     # min() alone would hand back 1 thread; the floor keeps behaviour no worse
     # than it was before this policy existed.
-    monkeypatch.setattr(os, "cpu_count", lambda: 1)
+    monkeypatch.setattr(container_limits, "effective_cpu_count", lambda: 1)
     heavy = next(m for m in sd._MODELS.values() if m.heavy)
     assert sd._threads_for(heavy) == sd._NUM_THREADS
 

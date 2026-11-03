@@ -55,7 +55,9 @@ def _threads_for(spec: "SherpaModelSpec") -> int:
         return _NUM_THREADS
     if not getattr(spec, "heavy", False):
         return _NUM_THREADS
-    cores = os.cpu_count() or 1
+    from core.container_limits import effective_cpu_count
+
+    cores = effective_cpu_count()
     return max(_NUM_THREADS, min(_LARGE_MODEL_THREADS, cores))
 
 

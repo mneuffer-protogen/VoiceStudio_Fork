@@ -38,9 +38,9 @@ def available_memory() -> dict:
     (unified memory), so no separate VRAM fields are reported."""
     out: dict = {}
     try:
-        import psutil
+        from core.container_limits import virtual_memory
 
-        vm = psutil.virtual_memory()
+        vm = virtual_memory()
         out["ram_available_gb"] = round(vm.available / (1024 ** 3), 2)
         out["ram_total_gb"] = round(vm.total / (1024 ** 3), 2)
     except Exception:  # noqa: BLE001 — psutil missing/failed: RAM unknown, not fatal

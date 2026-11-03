@@ -191,8 +191,8 @@ def _check_data_dir() -> dict:
 
 def _check_ram() -> dict:
     try:
-        import psutil
-        total_gb = psutil.virtual_memory().total / (1024 ** 3)
+        from core.container_limits import virtual_memory
+        total_gb = virtual_memory().total / (1024 ** 3)
     except Exception as e:
         return _check("ram", "System memory", WARN, f"could not read: {e}")
     detail = f"{total_gb:.1f} GB total"

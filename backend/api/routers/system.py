@@ -6,6 +6,7 @@ import platform
 import time
 import uuid
 import psutil
+from core.container_limits import virtual_memory as _container_virtual_memory
 import asyncio
 import logging
 from fastapi import APIRouter, Depends, File, UploadFile, HTTPException, Query, Request
@@ -206,7 +207,7 @@ def _detect_gpu() -> tuple[str, float]:
 # Settings page load and must stay cheap.
 _CPU_MODEL = _detect_cpu_model()
 _GPU_NAME, _VRAM_TOTAL_GB = _detect_gpu()
-_RAM_TOTAL_GB = round(psutil.virtual_memory().total / (1024 ** 3), 1)
+_RAM_TOTAL_GB = round(_container_virtual_memory(psutil.virtual_memory).total / (1024 ** 3), 1)
 _OS_VERSION = platform.platform()
 
 
@@ -881,7 +882,7 @@ def get_sys_info():
         gpu_utilization, vram, total_vram = nvidia_stats
         gpu_active = gpu_active or gpu_utilization > 0 or vram > 0.01
 
-    vm = psutil.virtual_memory()
+    vm = _container_virtual_memory(psutil.virtual_memory)
     cpu_frequency = psutil.cpu_freq()
     return {
         "cpu": psutil.cpu_percent(interval=None),
@@ -953,7 +954,7 @@ async def flush_memory(unload_model: bool = False):
     except Exception:
         pass
 
-    ram_after = psutil.virtual_memory().used / (1024**3)
+    ram_after = _container_virtual_memory(psutil.virtual_memory).used / (1024**3)
 
     return {
         "flushed": True,

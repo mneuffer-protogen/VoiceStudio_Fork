@@ -1,6 +1,7 @@
 import os
 import re
 import sys
+from core.container_limits import effective_cpu_count as _effective_cpu_count
 
 def get_app_data_dir():
     custom_dir = os.environ.get("OMNIVOICE_DATA_DIR")
@@ -108,7 +109,7 @@ CRASH_LOG_PATH = os.path.join(DATA_DIR, "crash_log.txt")   # only written on unh
 LOG_PATH = os.path.join(DATA_DIR, "omnivoice.log")          # rolling runtime log — what the Settings UI reads
 
 IDLE_TIMEOUT_SECONDS = int(os.environ.get("OMNIVOICE_IDLE_TIMEOUT", "900"))
-CPU_POOL_WORKERS = int(os.environ.get("OMNIVOICE_CPU_POOL", "0")) or min(8, (os.cpu_count() or 4))
+CPU_POOL_WORKERS = int(os.environ.get("OMNIVOICE_CPU_POOL", "0")) or min(8, _effective_cpu_count())
 
 def ensure_dirs():
     for d in [DATA_DIR, VOICES_DIR, OUTPUTS_DIR, DUB_DIR, PREVIEW_DIR]:
