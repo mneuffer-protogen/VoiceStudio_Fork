@@ -19,6 +19,7 @@ ignores the header, so either side can be upgraded first.
 from __future__ import annotations
 
 import asyncio
+import contextvars
 import json
 import logging
 import secrets
@@ -38,6 +39,16 @@ RESULT_TTL_S = 3600.0
 #: connection can still read them).
 FETCHED_TTL_S = 300.0
 POLL_AFTER_S = 2
+
+#: True while a route serves a ``Prefer: respond-async`` request. Nobody holds
+#: a connection open for it, so a route may let it wait in the inference queue
+#: instead of refusing it as busy (see ``is_deferred``).
+_deferred: contextvars.ContextVar[bool] = contextvars.ContextVar("omnivoice_deferred", default=False)
+
+
+def is_deferred() -> bool:
+    """Whether the current request is being served in the background."""
+    return _deferred.get()
 
 
 @dataclass
@@ -132,6 +143,9 @@ class DeferredResponseMiddleware:
         )
 
     async def _run(self, scope, body: bytes, job: _Deferred) -> None:
+        # This task has its own context (copied at create_task), so the flag
+        # never leaks into other requests.
+        _deferred.set(True)
         delivered = False
         never = asyncio.Event()
 
