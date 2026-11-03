@@ -399,6 +399,66 @@ export async function generateCloneStreaming(
   }
 }
 
+/**
+ * `POST /generate` with `Prefer: respond-async`, resolved to the finished
+ * response. A take can render for many minutes without a byte on the wire, and
+ * proxies cut such requests (Railway after 5 idle minutes, nginx at
+ * `proxy_read_timeout`) while the backend goes on to save the take. The backend
+ * answers 202 with a job id instead, and short polls carry the wait. A backend
+ * without the feature ignores the header and answers as before.
+ */
+export async function postGenerate(form: FormData, signal: AbortSignal): Promise<Response> {
+  const submitted = await apiFetch('/generate', {
+    method: 'POST',
+    body: form,
+    headers: { Prefer: 'respond-async' },
+    signal,
+  });
+  if (submitted.status !== 202) return submitted;
+  const { job_id: jobId, poll_after: pollAfter } = (await submitted.json()) as {
+    job_id?: string;
+    poll_after?: number;
+  };
+  if (!jobId) throw new ApiError(500, 'Generation job id missing');
+  const resultPath = `/generate/result/${encodeURIComponent(jobId)}`;
+  const cancel = (): void => {
+    void apiFetch(resultPath, { method: 'DELETE' }).catch(() => undefined);
+  };
+  signal.addEventListener('abort', cancel, { once: true });
+  try {
+    // Quick first checks keep short takes snappy; then settle on the
+    // backend's suggested interval.
+    let delayMs = 250;
+    const maxDelayMs = Math.max(500, (pollAfter ?? 2) * 1000);
+    for (;;) {
+      await abortableDelay(delayMs, signal);
+      const res = await apiFetch(resultPath, { signal, cache: 'no-store' });
+      if (res.status !== 202) return res;
+      delayMs = Math.min(maxDelayMs, delayMs * 2);
+    }
+  } finally {
+    signal.removeEventListener('abort', cancel);
+  }
+}
+
+function abortableDelay(ms: number, signal: AbortSignal): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (signal.aborted) {
+      reject(new DOMException('Aborted', 'AbortError'));
+      return;
+    }
+    const onAbort = (): void => {
+      clearTimeout(timer);
+      reject(new DOMException('Aborted', 'AbortError'));
+    };
+    const timer = setTimeout(() => {
+      signal.removeEventListener('abort', onAbort);
+      resolve();
+    }, ms);
+    signal.addEventListener('abort', onAbort, { once: true });
+  });
+}
+
 /** Synthesize one take through the classic whole-file path. */
 export async function generateClone(
   input: CloneGenerateInput,
@@ -419,11 +479,7 @@ export async function generateClone(
   );
   const finishActivity = beginAppActivity('synthesis');
   try {
-    const res = await apiFetch('/generate', {
-      method: 'POST',
-      body: form,
-      signal: controller.signal,
-    });
+    const res = await postGenerate(form, controller.signal);
     const blob = await readAudioBody(res, opts.onProgress);
     return { blob, ...parseGenerateHeaders(res.headers) };
   } finally {

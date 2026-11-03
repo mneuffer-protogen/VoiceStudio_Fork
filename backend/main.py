@@ -1423,6 +1423,9 @@ async def lifespan(app: FastAPI):
         getattr(app.state, "keepalive_task", None),
         timeout=20.0,
     )
+    from core.deferred_response import cancel_all as _cancel_deferred
+
+    _cancel_deferred()
     # The watermark warm-up runs on its dedicated 1-worker pool. Cancellation
     # detaches the asyncio future but cannot kill a thread inside AudioSeal,
     # so drain it fully before lifespan teardown reports completion.
@@ -1993,6 +1996,11 @@ from core.busy_keepalive import InFlightRequestsMiddleware
 app.add_middleware(InFlightRequestsMiddleware)
 app.add_middleware(RenderTraceMiddleware)
 app.add_middleware(StartupGateMiddleware)
+# Inside every auth gate, outside the startup gate and render trace: a
+# `Prefer: respond-async` /generate is authenticated like any request, then
+# served in the background while the client polls (proxy idle timeouts).
+from core.deferred_response import DeferredResponseMiddleware
+app.add_middleware(DeferredResponseMiddleware)
 
 # Inert unless a PIN is set. CORS is registered after both auth gates below so
 # Starlette places it outside them: browser preflights carry no credentials and
