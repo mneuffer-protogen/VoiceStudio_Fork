@@ -140,3 +140,26 @@ def test_finished_results_expire(monkeypatch):
     dr._jobs["fetched"] = fetched
     dr._purge(100.0 + dr.FETCHED_TTL_S + 1)
     assert "fetched" not in dr._jobs
+
+
+def test_routes_can_tell_a_background_request_from_a_held_open_one():
+    seen = []
+
+    async def route(scope, receive, send):
+        await receive()
+        seen.append(dr.is_deferred())
+        await send({"type": "http.response.start", "status": 200, "headers": []})
+        await send({"type": "http.response.body", "body": b"ok"})
+
+    async def run():
+        app = dr.DeferredResponseMiddleware(route)
+        await _call(app, "POST", "/v1/audio/speech", b"x")
+        status, _h, body = await _call(app, "POST", "/v1/audio/speech", b"x", ASYNC)
+        job_id = json.loads(body)["job_id"]
+        await asyncio.sleep(0.05)
+        await _call(app, "GET", f"/generate/result/{job_id}")
+        return dr.is_deferred()
+
+    outside = asyncio.run(run())
+    assert seen == [False, True]
+    assert outside is False

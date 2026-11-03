@@ -549,6 +549,11 @@ async def _encode_audio(wav_tensor, sample_rate: int, fmt: str,
     return await _encode_ffmpeg(ffmpeg, wav_tensor, sample_rate, fmt), mime, ext
 
 
+#: How long a background (`Prefer: respond-async`) speech request may wait for
+#: a free worker. Default 12 hours: a whole course queued on a CPU host.
+_DEFERRED_QUEUE_TIMEOUT_S = float(os.environ.get("OMNIVOICE_DEFERRED_QUEUE_TIMEOUT_S", str(12 * 3600)))
+
+
 def _typed_speech_http_error(e: Exception) -> Optional[HTTPException]:
     """Map typed synthesis failures to actionable HTTP errors (#1172/#1173).
 
@@ -586,8 +591,21 @@ def _run_tts(backend, text: str, kw: dict):
     import torch
     from services.audio_dsp import apply_mastering, normalize_audio, trim_speech_padding
     from services.watermark import mark_synthetic
-    wav = backend.generate(text, **kw)
     sr = backend.sample_rate
+    # Inline [pause 300ms] markers work here as on /generate (silence stitched
+    # between spans, model-free), so API clients can time their pauses.
+    from omnivoice.utils.text import parse_pause_markers
+    segments = parse_pause_markers(text)
+    if len(segments) > 1 or (segments and segments[0][1] > 0):
+        from api.routers.generation import _render_with_pauses
+        from services.chunked_tts import DEFAULT_CROSSFADE_MS, DEFAULT_MAX_CHUNK_CHARS
+        span_kw = {k: v for k, v in kw.items() if k != "duration"}
+        wav = _render_with_pauses(
+            lambda span, chunk_index=None: backend.generate(span, **span_kw),
+            segments, sr, trim_spans=True,
+            max_chunk_chars=DEFAULT_MAX_CHUNK_CHARS, crossfade_ms=DEFAULT_CROSSFADE_MS)
+    else:
+        wav = backend.generate(text, **kw)
     # Strip the engine's lead-in/tail silence, as /generate does — unless the
     # caller asked for an exact `duration`, which a trim would shorten.
     if not kw.get("duration") and torch.is_tensor(wav):
@@ -758,12 +776,20 @@ async def create_speech(req: SpeechRequest):
     # with a misleading "too heavy for the available compute" error. Model
     # loading gets OMNIVOICE_MODEL_LOAD_TIMEOUT (default 1200s); once warm
     # this is a per-request no-op.
+    # Background (`Prefer: respond-async`) requests may wait far longer for a
+    # free worker than a held-open request: a bulk render queues every
+    # segment of a course up front.
+    from core.deferred_response import is_deferred
+    _deferred = is_deferred()
+    _queue_timeout = _DEFERRED_QUEUE_TIMEOUT_S if _deferred else None
+
     from services.model_manager import _model_load_timeout
     try:
         await run_on_gpu_pool_guarded(
             backend.ensure_ready,
             what=f"TTS engine '{backend.id}' model load",
             timeout=_model_load_timeout(),
+            queue_timeout=_queue_timeout,
         )
     # Catch the BUILTIN TimeoutError base, not GpuJobTimeoutError by name:
     # several tests reload services.model_manager mid-suite, so a class
@@ -813,9 +839,13 @@ async def create_speech(req: SpeechRequest):
     # Refusing up front with 429 + Retry-After lets a client back off correctly,
     # and costs an interactive user nothing (the policy only trips when a full
     # wave of jobs is ALREADY queued — see check_gpu_admission).
+    # A `Prefer: respond-async` request is exempt: no client is waiting on it,
+    # so it takes its place in the queue (bulk narration submits a whole course
+    # at once) and is served in order.
     from services.model_manager import check_gpu_admission
     try:
-        check_gpu_admission(what="OpenAI TTS generate")
+        if not _deferred:
+            check_gpu_admission(what="OpenAI TTS generate")
     except TimeoutError as e:
         logger.warning("OpenAI TTS refused — GPU pool saturated: %s", e)
         raise HTTPException(
@@ -832,7 +862,8 @@ async def create_speech(req: SpeechRequest):
         from services.model_manager import generate_timeout_s
         wav, sr = await run_on_gpu_pool_guarded(
             lambda: _run_tts(backend, text, kw), what="OpenAI TTS generate",
-            timeout=generate_timeout_s(text, engine=backend))
+            timeout=generate_timeout_s(text, engine=backend),
+            queue_timeout=_queue_timeout)
     except Exception as e:
         # #1172/#1173: typed failures get their real status + actionable
         # message (400 bad input / 503 broken engine binary) instead of a
