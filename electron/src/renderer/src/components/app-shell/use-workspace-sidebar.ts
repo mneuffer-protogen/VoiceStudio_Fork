@@ -15,6 +15,7 @@ const SECONDARY_ROUTES = new Set([
   '/transcriptions',
   '/calls',
   '/workflows',
+  '/queue',
   '/settings',
   // No pane of their own, but they keep the same icon rail as every other
   // workspace so the navigation never changes shape between pages.

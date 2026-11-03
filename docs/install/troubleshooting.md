@@ -130,7 +130,12 @@ page) is reported as a proxy problem, not a VoiceStudio one: raise its read time
 (`/generate` with `stream=true`) and long-form renders (Audiobook, Stories, resume)
 send a keepalive every 15 seconds of silence (a blank NDJSON line or an SSE comment)
 and ask proxies not to buffer, so an idle cutoff such as Cloudflare's `524` does not
-end them while a slow chunk or chapter renders. Choosing the best 15-second
+end them while a slow chunk or chapter renders. Whole-take generations from the
+app send `Prefer: respond-async`: the backend answers `202` with a job id at once,
+renders in the background, and the app polls `GET /generate/result/{job_id}` until
+the take is ready (`DELETE` cancels it), so no request stays silent long enough for
+a proxy idle limit (Railway's 5 minutes, for example) to cut it. Scripted clients
+can do the same; without the header `/generate` answers as before. Choosing the best 15-second
 window of a long reference clip happens before the generate time budget starts, so a
 slow CPU speech-to-text model no longer causes `TTS generate exceeded 300s`.
 

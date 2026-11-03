@@ -341,7 +341,8 @@
     "gallery": "Gallery",
     "batch_dub": "Batch Dubbing",
     "transcribe": "Transcribe",
-    "calls": "Calls"
+    "calls": "Calls",
+    "queue": "Queue"
   },
   "backend": {
     "starting": "Starting the local engine…",
@@ -4536,5 +4537,36 @@
     "title": "Non-commercial use only",
     "body": "VoiceStudio is not for commercial use. Please do not use this app for commercial purposes. Select \"I agree\" to confirm and continue.",
     "agree": "I agree"
+  },
+  "queue": {
+    "title": "Queue",
+    "summary": "Running: {{running}} · Waiting: {{waiting}} · Workers: {{workers}}",
+    "loading": "Loading the queue…",
+    "running": "Running",
+    "waiting": "Waiting",
+    "recent": "Recent",
+    "none_running": "Nothing is running.",
+    "none_waiting": "Nothing is waiting.",
+    "none_recent": "No finished work yet.",
+    "steps": "Steps: {{n}}",
+    "voice": "Voice: {{voice}}",
+    "chars": "Characters: {{n}}",
+    "client": "From {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "App",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "Background",
+    "state_starting": "Starting",
+    "state_waiting": "Waiting",
+    "state_running": "Running",
+    "state_done": "Done",
+    "state_failed": "Failed",
+    "estimate_basis": "Estimated from similar finished jobs: {{n}}",
+    "estimate_first": "First estimate: no similar jobs have finished yet",
+    "starts_in": "starts in ~{{time}}",
+    "takes_about": "takes ~{{time}}",
+    "elapsed": "{{time}} elapsed",
+    "remaining": "~{{time}} left"
   }
 }

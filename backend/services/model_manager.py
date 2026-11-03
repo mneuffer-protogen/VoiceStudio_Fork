@@ -774,6 +774,38 @@ async def run_on_gpu_pool_guarded(fn, *, what: str = "GPU job",
                                   queue_timeout: "float | None" = None,
                                   min_vram_gb: float = 0.0,
                                   on_abandon=None):
+    """Run ``fn`` on the GPU pool (see :func:`_run_on_gpu_pool_guarded`),
+    reporting the job as queued → running → finished to the Queue page
+    (``core.activity``). Tracking never changes the job's outcome."""
+    try:
+        from core.activity import PoolJob
+
+        pool_job = PoolJob(what)
+    except Exception:  # noqa: BLE001 — visibility must never block work
+        pool_job = None
+    try:
+        result = await _run_on_gpu_pool_guarded(
+            fn, what=what, timeout=timeout, executor=executor,
+            queue_timeout=queue_timeout, min_vram_gb=min_vram_gb,
+            on_abandon=on_abandon,
+            on_start=pool_job.started if pool_job is not None else None,
+        )
+    except BaseException as exc:
+        if pool_job is not None:
+            pool_job.finished(exc)
+        raise
+    if pool_job is not None:
+        pool_job.finished()
+    return result
+
+
+async def _run_on_gpu_pool_guarded(fn, *, what: str = "GPU job",
+                                   timeout: "float | None" = None,
+                                   executor=None,
+                                   queue_timeout: "float | None" = None,
+                                   min_vram_gb: float = 0.0,
+                                   on_abandon=None,
+                                   on_start=None):
     """Run blocking ``fn`` on the GPU pool, bounding **execution** — not the
     wait for a free worker.
 
@@ -849,6 +881,8 @@ async def run_on_gpu_pool_guarded(fn, *, what: str = "GPU job",
         _ident_box["ident"] = threading.get_ident()
         try:
             loop.call_soon_threadsafe(started.set)
+            if on_start is not None:
+                loop.call_soon_threadsafe(on_start)
         except RuntimeError:
             pass  # loop already closed (caller vanished) — still run the job
         try:

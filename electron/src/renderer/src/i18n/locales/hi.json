@@ -2380,7 +2380,8 @@
     "clone": "आवाज़ की क्लोनिंग",
     "primary": "मुख्य नेविगेशन",
     "dictation": "श्रुतलेखन",
-    "calls": "कॉल"
+    "calls": "कॉल",
+    "queue": "कतार"
   },
   "profiles": {
     "locked": "आवाज लॉक! पहचान अब सभी पीढ़ियों में एक समान है।",
@@ -4536,5 +4537,36 @@
     "title": "केवल गैर-व्यावसायिक उपयोग के लिए",
     "body": "VoiceStudio व्यावसायिक उपयोग के लिए नहीं है। कृपया इस ऐप का उपयोग व्यावसायिक उद्देश्यों के लिए न करें। पुष्टि करने और आगे बढ़ने के लिए \"मैं सहमत हूँ\" चुनें।",
     "agree": "मैं सहमत हूँ"
+  },
+  "queue": {
+    "title": "कतार",
+    "summary": "चल रहे: {{running}} · प्रतीक्षा में: {{waiting}} · वर्कर: {{workers}}",
+    "loading": "कतार लोड हो रही है…",
+    "running": "चल रहे",
+    "waiting": "प्रतीक्षा में",
+    "recent": "हाल के",
+    "none_running": "कुछ भी नहीं चल रहा।",
+    "none_waiting": "कुछ भी प्रतीक्षा में नहीं है।",
+    "none_recent": "अभी तक कोई काम पूरा नहीं हुआ।",
+    "steps": "चरण: {{n}}",
+    "voice": "आवाज़: {{voice}}",
+    "chars": "अक्षर: {{n}}",
+    "client": "{{client}} से",
+    "http_status": "HTTP {{status}}",
+    "source_app": "ऐप",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "पृष्ठभूमि",
+    "state_starting": "शुरू हो रहा है",
+    "state_waiting": "प्रतीक्षा में",
+    "state_running": "चल रहा है",
+    "state_done": "पूरा",
+    "state_failed": "विफल",
+    "estimate_basis": "मिलते-जुलते पूरे हुए कामों से अनुमान: {{n}}",
+    "estimate_first": "पहला अनुमान: अभी तक कोई मिलता-जुलता काम पूरा नहीं हुआ",
+    "starts_in": "~{{time}} में शुरू",
+    "takes_about": "~{{time}} लगेगा",
+    "elapsed": "{{time}} बीते",
+    "remaining": "~{{time}} बाकी"
   }
 }

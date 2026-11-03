@@ -39,6 +39,7 @@ const CallsPage = lazyRouteComponent(
   () => import('@/features/workflows/workflows-page'),
   'WorkflowCallsPage',
 );
+const QueuePage = lazyRouteComponent(() => import('@/features/queue/queue-page'), 'QueuePage');
 const ToolsPage = lazyRouteComponent(() => import('@/features/tools/tools-page'), 'ToolsPage');
 const IntegrationsPage = lazyRouteComponent(
   () => import('@/features/integrations/integrations-page'),
@@ -157,6 +158,11 @@ export const workflowsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/workflows',
   component: WorkflowsPage,
+});
+export const queueRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/queue',
+  component: QueuePage,
 });
 export const toolsRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -298,6 +304,7 @@ export const routeTree = rootRoute.addChildren([
   pronunciationRoute,
   mediaRoute,
   toolsRoute,
+  queueRoute,
   callsRoute,
   workflowsRoute,
   integrationsRoute,

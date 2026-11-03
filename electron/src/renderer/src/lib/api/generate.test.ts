@@ -366,6 +366,55 @@ describe('generateClone', () => {
     await expect(pending).rejects.toMatchObject({ name: 'AbortError' });
   });
 
+  it('asks for an async job and polls for the finished take (proxy idle timeouts)', async () => {
+    vi.useFakeTimers();
+    const bytes = new Uint8Array([82, 73, 70, 70]);
+    const calls: Array<[string, RequestInit]> = [];
+    let polls = 0;
+    vi.stubGlobal('fetch', async (url: string, init: RequestInit = {}) => {
+      calls.push([url, init]);
+      if (url === '/api/generate')
+        return new Response(JSON.stringify({ job_id: 'j1', status: 'running', poll_after: 2 }), {
+          status: 202,
+        });
+      polls += 1;
+      if (polls < 3) return new Response(JSON.stringify({ status: 'running' }), { status: 202 });
+      return new Response(bytes, {
+        status: 200,
+        headers: { 'Content-Type': 'audio/wav', 'X-Audio-Id': 'take-9' },
+      });
+    });
+    const pending = generateClone({ ...BASE_INPUT, profileId: 'p1' });
+    await vi.advanceTimersByTimeAsync(10_000);
+    const result = await pending;
+    expect(new Headers(calls[0][1].headers).get('prefer')).toBe('respond-async');
+    expect(calls.slice(1).map(([url]) => url)).toEqual(Array(3).fill('/api/generate/result/j1'));
+    expect(result.id).toBe('take-9');
+    expect(result.blob.size).toBe(bytes.length);
+  });
+
+  it('cancels the async job when the caller aborts while polling', async () => {
+    vi.useFakeTimers();
+    const methods: string[] = [];
+    vi.stubGlobal('fetch', async (url: string, init: RequestInit = {}) => {
+      methods.push(`${init.method ?? 'GET'} ${url}`);
+      if (url === '/api/generate')
+        return new Response(JSON.stringify({ job_id: 'j2', poll_after: 2 }), { status: 202 });
+      return new Response(JSON.stringify({ status: 'running' }), { status: 202 });
+    });
+    const controller = new AbortController();
+    const pending = generateClone(
+      { ...BASE_INPUT, profileId: 'p1' },
+      { signal: controller.signal },
+    );
+    const assertion = expect(pending).rejects.toMatchObject({ name: 'AbortError' });
+    await vi.advanceTimersByTimeAsync(1_000);
+    controller.abort();
+    await assertion;
+    await vi.advanceTimersByTimeAsync(10);
+    expect(methods).toContain('DELETE /api/generate/result/j2');
+  });
+
   it('aborts on its own after the backstop timeout', async () => {
     vi.useFakeTimers();
     vi.stubGlobal(

@@ -2380,7 +2380,8 @@
     "design": "Desain Suara",
     "clone": "Kloning suara",
     "primary": "Navigasi utama",
-    "calls": "Panggilan"
+    "calls": "Panggilan",
+    "queue": "Antrean"
   },
   "profiles": {
     "locked": "Suara terkunci! Identitas sekarang konsisten di semua generasi.",
@@ -4536,5 +4537,36 @@
     "title": "Hanya untuk penggunaan nonkomersial",
     "body": "VoiceStudio tidak untuk penggunaan komersial. Harap jangan gunakan aplikasi ini untuk tujuan komersial. Pilih \"Saya setuju\" untuk mengonfirmasi dan melanjutkan.",
     "agree": "Saya setuju"
+  },
+  "queue": {
+    "title": "Antrean",
+    "summary": "Berjalan: {{running}} · Menunggu: {{waiting}} · Pekerja: {{workers}}",
+    "loading": "Memuat antrean…",
+    "running": "Berjalan",
+    "waiting": "Menunggu",
+    "recent": "Terbaru",
+    "none_running": "Tidak ada yang berjalan.",
+    "none_waiting": "Tidak ada yang menunggu.",
+    "none_recent": "Belum ada pekerjaan yang selesai.",
+    "steps": "Langkah: {{n}}",
+    "voice": "Suara: {{voice}}",
+    "chars": "Karakter: {{n}}",
+    "client": "Dari {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "Aplikasi",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "Latar belakang",
+    "state_starting": "Memulai",
+    "state_waiting": "Menunggu",
+    "state_running": "Berjalan",
+    "state_done": "Selesai",
+    "state_failed": "Gagal",
+    "estimate_basis": "Perkiraan dari pekerjaan serupa yang selesai: {{n}}",
+    "estimate_first": "Perkiraan pertama: belum ada pekerjaan serupa yang selesai",
+    "starts_in": "mulai dalam ~{{time}}",
+    "takes_about": "butuh ~{{time}}",
+    "elapsed": "{{time}} berlalu",
+    "remaining": "sisa ~{{time}}"
   }
 }

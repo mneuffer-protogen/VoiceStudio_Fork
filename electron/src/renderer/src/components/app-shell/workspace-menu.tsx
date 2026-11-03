@@ -16,6 +16,7 @@ import {
   ChevronRightIcon,
   BlocksIcon,
   WorkflowIcon,
+  ListOrderedIcon,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -37,6 +38,7 @@ type Destination = readonly [
     | '/transcriptions'
     | '/personas'
     | '/workflows'
+    | '/queue'
     | '/integrations',
   label: string,
   icon: typeof AudioLinesIcon,
@@ -64,6 +66,7 @@ const laterDestinations: Destination[] = [
   ['/workflows', 'workflows.title', WorkflowIcon],
   ['/projects', 'projects.title', FolderIcon],
   ['/tools', 'tools.title', WrenchIcon],
+  ['/queue', 'nav.queue', ListOrderedIcon],
   ['/integrations', 'integrationCatalog.title', BlocksIcon],
 ];
 
@@ -85,6 +88,7 @@ const iconMotion: Record<Destination[0], string> = {
   '/workflows': 'pulse',
   '/projects': 'lift',
   '/tools': 'tilt',
+  '/queue': 'lift',
   '/integrations': 'turn',
 };
 

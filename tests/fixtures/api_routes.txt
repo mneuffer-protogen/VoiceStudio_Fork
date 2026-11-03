@@ -162,6 +162,7 @@ GET /projects
 GET /projects/{project_id}
 GET /pronunciation
 GET /pronunciation/export
+GET /queue
 GET /setup/download-stream
 GET /setup/preflight
 GET /setup/recommendations

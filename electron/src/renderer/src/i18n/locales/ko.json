@@ -2380,7 +2380,8 @@
     "design": "음성 디자인",
     "primary": "기본 탐색",
     "calls": "통화",
-    "clone": "음성 복제"
+    "clone": "음성 복제",
+    "queue": "대기열"
   },
   "profiles": {
     "lock_failed": "프로필을 잠그지 못했습니다.",
@@ -4536,5 +4537,36 @@
     "title": "비상업적 용도로만 사용",
     "body": "VoiceStudio는 상업적 용도로 사용할 수 없습니다. 이 앱을 상업적 목적으로 사용하지 마세요. 확인하고 계속하려면 \"동의\"를 선택하세요.",
     "agree": "동의"
+  },
+  "queue": {
+    "title": "대기열",
+    "summary": "실행 중: {{running}} · 대기 중: {{waiting}} · 워커: {{workers}}",
+    "loading": "대기열을 불러오는 중…",
+    "running": "실행 중",
+    "waiting": "대기 중",
+    "recent": "최근",
+    "none_running": "실행 중인 작업이 없습니다.",
+    "none_waiting": "대기 중인 작업이 없습니다.",
+    "none_recent": "아직 완료된 작업이 없습니다.",
+    "steps": "단계: {{n}}",
+    "voice": "음성: {{voice}}",
+    "chars": "문자 수: {{n}}",
+    "client": "출처 {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "앱",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "백그라운드",
+    "state_starting": "시작 중",
+    "state_waiting": "대기 중",
+    "state_running": "실행 중",
+    "state_done": "완료",
+    "state_failed": "실패",
+    "estimate_basis": "비슷한 완료 작업 기반 추정: {{n}}",
+    "estimate_first": "첫 추정: 아직 완료된 비슷한 작업이 없습니다",
+    "starts_in": "약 {{time}} 후 시작",
+    "takes_about": "약 {{time}} 소요",
+    "elapsed": "{{time}} 경과",
+    "remaining": "약 {{time}} 남음"
   }
 }

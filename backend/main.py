@@ -805,6 +805,7 @@ def _phase_a_build_inner() -> None:
         media_tools as media_tools_router,  # Audio tools: ffmpeg/ffprobe/yt-dlp
         auth as auth_router,
         voice_convert,  # Studio Convert: speech-to-speech via ASR → TTS
+        queue as queue_router,  # Queue page: running / waiting work and estimates
     )
     from api.routers import mcp_bindings as _mcp_bindings_router  # noqa: E402
     from api.routers import telephony_twilio as _telephony_twilio_router  # noqa: E402
@@ -819,6 +820,7 @@ def _phase_a_build_inner() -> None:
         audiobook, longform_jobs, pronunciation, settings_router,
         media_tools_router, auth_router, _mcp_bindings_router,
         _telephony_twilio_router, _calls_router, _cloud_sync_router,
+        queue_router,
     ])
     # Download-acceleration state, once, for triage-from-logs (FDL-03).
     try:
@@ -1235,6 +1237,11 @@ async def _phase_b(app: FastAPI) -> None:
             logger.exception("cloud sync did not start")
 
     app.state.cloud_sync_task = asyncio.create_task(_start_cloud_sync())
+    # Opt-in (OMNIVOICE_KEEPALIVE_URL): keep a scale-to-zero host such as
+    # Railway Serverless awake while work is in progress. None when unset.
+    from core.busy_keepalive import start_keepalive
+
+    app.state.keepalive_task = start_keepalive()
     if mcp_mounted:
         logger.info("MCP server mounted at /mcp")
     # Phone calls (opt-in): the separate loopback telephony listener resumes
@@ -1415,8 +1422,12 @@ async def lifespan(app: FastAPI):
         getattr(app.state, "preload_task", None),
         getattr(app.state, "capture_preload_task", None),
         getattr(app.state, "watermark_preload_task", None),
+        getattr(app.state, "keepalive_task", None),
         timeout=20.0,
     )
+    from core.deferred_response import cancel_all as _cancel_deferred
+
+    _cancel_deferred()
     # The watermark warm-up runs on its dedicated 1-worker pool. Cancellation
     # detaches the asyncio future but cannot kill a thread inside AudioSeal,
     # so drain it fully before lifespan teardown reports completion.
@@ -1982,8 +1993,20 @@ _allowed = allowed_origin_values()
 # the two probe paths until the deferred startup completes (and is a no-op
 # forever after).
 from core.render_trace import RenderTraceMiddleware
+from core.busy_keepalive import InFlightRequestsMiddleware
+from core.activity import ActivityMiddleware
+# Innermost: opens a Queue-page activity per state-changing request (also for
+# deferred /generate, whose background run passes through here).
+app.add_middleware(ActivityMiddleware)
+# Counts in-flight requests for the opt-in scale-to-zero keep-alive.
+app.add_middleware(InFlightRequestsMiddleware)
 app.add_middleware(RenderTraceMiddleware)
 app.add_middleware(StartupGateMiddleware)
+# Inside every auth gate, outside the startup gate and render trace: a
+# `Prefer: respond-async` /generate is authenticated like any request, then
+# served in the background while the client polls (proxy idle timeouts).
+from core.deferred_response import DeferredResponseMiddleware
+app.add_middleware(DeferredResponseMiddleware)
 
 # Inert unless a PIN is set. CORS is registered after both auth gates below so
 # Starlette places it outside them: browser preflights carry no credentials and

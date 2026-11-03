@@ -2380,7 +2380,8 @@
     "clone": "Stemklonen",
     "primary": "Hoofdnavigatie",
     "dictation": "Dicteren",
-    "calls": "Oproepen"
+    "calls": "Oproepen",
+    "queue": "Wachtrij"
   },
   "profiles": {
     "locked": "Stem vergrendeld! Identiteit is nu consistent voor alle generaties.",
@@ -4536,5 +4537,36 @@
     "title": "Alleen voor niet-commercieel gebruik",
     "body": "VoiceStudio is niet bedoeld voor commercieel gebruik. Gebruik deze app niet voor commerciële doeleinden. Kies \"Ik ga akkoord\" om te bevestigen en door te gaan.",
     "agree": "Ik ga akkoord"
+  },
+  "queue": {
+    "title": "Wachtrij",
+    "summary": "Bezig: {{running}} · Wachtend: {{waiting}} · Workers: {{workers}}",
+    "loading": "Wachtrij laden…",
+    "running": "Bezig",
+    "waiting": "Wachtend",
+    "recent": "Recent",
+    "none_running": "Er loopt niets.",
+    "none_waiting": "Er wacht niets.",
+    "none_recent": "Nog geen afgerond werk.",
+    "steps": "Stappen: {{n}}",
+    "voice": "Stem: {{voice}}",
+    "chars": "Tekens: {{n}}",
+    "client": "Van {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "App",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "Achtergrond",
+    "state_starting": "Starten",
+    "state_waiting": "Wachtend",
+    "state_running": "Bezig",
+    "state_done": "Klaar",
+    "state_failed": "Mislukt",
+    "estimate_basis": "Geschat op basis van vergelijkbare afgeronde taken: {{n}}",
+    "estimate_first": "Eerste schatting: nog geen vergelijkbare taken afgerond",
+    "starts_in": "start over ~{{time}}",
+    "takes_about": "duurt ~{{time}}",
+    "elapsed": "{{time}} verstreken",
+    "remaining": "nog ~{{time}}"
   }
 }

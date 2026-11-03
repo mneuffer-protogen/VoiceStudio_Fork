@@ -2428,7 +2428,8 @@
     "design": "التصميم الصوتي",
     "clone": "استنساخ الصوت",
     "primary": "التنقل الرئيسي",
-    "calls": "المكالمات"
+    "calls": "المكالمات",
+    "queue": "قائمة الانتظار"
   },
   "profiles": {
     "locked": "صوت مغلق! أصبحت الهوية الآن متسقة عبر جميع الأجيال.",
@@ -4588,5 +4589,36 @@
     "title": "للاستخدام غير التجاري فقط",
     "body": "VoiceStudio غير مخصص للاستخدام التجاري. يرجى عدم استخدام هذا التطبيق لأغراض تجارية. اختر \"أوافق\" للتأكيد والمتابعة.",
     "agree": "أوافق"
+  },
+  "queue": {
+    "title": "قائمة الانتظار",
+    "summary": "قيد التشغيل: {{running}} · في الانتظار: {{waiting}} · العمليات: {{workers}}",
+    "loading": "جارٍ تحميل قائمة الانتظار…",
+    "running": "قيد التشغيل",
+    "waiting": "في الانتظار",
+    "recent": "الأخيرة",
+    "none_running": "لا شيء قيد التشغيل.",
+    "none_waiting": "لا شيء في الانتظار.",
+    "none_recent": "لا توجد أعمال مكتملة بعد.",
+    "steps": "الخطوات: {{n}}",
+    "voice": "الصوت: {{voice}}",
+    "chars": "الأحرف: {{n}}",
+    "client": "من {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "التطبيق",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "في الخلفية",
+    "state_starting": "جارٍ البدء",
+    "state_waiting": "في الانتظار",
+    "state_running": "قيد التشغيل",
+    "state_done": "تم",
+    "state_failed": "فشل",
+    "estimate_basis": "تقدير من أعمال مماثلة مكتملة: {{n}}",
+    "estimate_first": "التقدير الأول: لم يكتمل أي عمل مماثل بعد",
+    "starts_in": "يبدأ خلال ~{{time}}",
+    "takes_about": "يستغرق ~{{time}}",
+    "elapsed": "مضى {{time}}",
+    "remaining": "متبقٍ ~{{time}}"
   }
 }

@@ -1906,6 +1906,13 @@ async def generate_speech(
         num_step = sampling_defaults.get("num_step", 16)
     if postprocess_output is None:
         postprocess_output = sampling_defaults.get("postprocess_output", True)
+    # Queue page: what predicts how long this take will run.
+    from core.activity import annotate as _annotate_activity
+
+    _annotate_activity(
+        kind="tts", engine=engine_id, steps=num_step, chars=len(text or ""),
+        voice=profile_id or preset_voice or ("reference" if ref_audio else "design" if instruct else "default"),
+    )
     try:
         backend_cls = get_backend_class(engine_id)
     except ValueError:

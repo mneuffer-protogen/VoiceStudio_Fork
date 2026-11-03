@@ -2380,7 +2380,8 @@
     "design": "Ses Tasarımı",
     "clone": "Ses klonlama",
     "primary": "Ana gezinme",
-    "calls": "Aramalar"
+    "calls": "Aramalar",
+    "queue": "Kuyruk"
   },
   "profiles": {
     "locked": "Ses kilitli! Kimlik artık tüm nesiller arasında tutarlıdır.",
@@ -4536,5 +4537,36 @@
     "title": "Yalnızca ticari olmayan kullanım için",
     "body": "VoiceStudio ticari kullanım için değildir. Lütfen bu uygulamayı ticari amaçlarla kullanmayın. Onaylayıp devam etmek için \"Kabul ediyorum\" seçeneğini seçin.",
     "agree": "Kabul ediyorum"
+  },
+  "queue": {
+    "title": "Kuyruk",
+    "summary": "Çalışıyor: {{running}} · Bekliyor: {{waiting}} · İşleyici: {{workers}}",
+    "loading": "Kuyruk yükleniyor…",
+    "running": "Çalışıyor",
+    "waiting": "Bekliyor",
+    "recent": "Son işler",
+    "none_running": "Çalışan bir şey yok.",
+    "none_waiting": "Bekleyen bir şey yok.",
+    "none_recent": "Henüz tamamlanan iş yok.",
+    "steps": "Adım: {{n}}",
+    "voice": "Ses: {{voice}}",
+    "chars": "Karakter: {{n}}",
+    "client": "Kaynak: {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "Uygulama",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "Arka plan",
+    "state_starting": "Başlıyor",
+    "state_waiting": "Bekliyor",
+    "state_running": "Çalışıyor",
+    "state_done": "Bitti",
+    "state_failed": "Başarısız",
+    "estimate_basis": "Benzer tamamlanmış işlerden tahmin: {{n}}",
+    "estimate_first": "İlk tahmin: henüz benzer iş tamamlanmadı",
+    "starts_in": "~{{time}} içinde başlar",
+    "takes_about": "~{{time}} sürer",
+    "elapsed": "{{time}} geçti",
+    "remaining": "~{{time}} kaldı"
   }
 }

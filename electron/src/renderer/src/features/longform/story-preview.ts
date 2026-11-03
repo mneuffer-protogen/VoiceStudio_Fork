@@ -1,4 +1,4 @@
-import { apiFetch } from '@/lib/api/client';
+import { postGenerate } from '@/lib/api/generate';
 import { exportStoryAudio, exportStems } from '@shared/utils/storyExport';
 import { overridesToRequest } from '@shared/utils/longformOverrides';
 import { resolveStoryVoice } from './story-inputs';
@@ -48,11 +48,10 @@ function storyAudioHelpers(draft: Draft, signal: AbortSignal, profiles: { id: st
     }),
     fetchChunk: async (text: string, profileId: string | null, speed: number | null) => {
       signal.throwIfAborted();
-      const response = await apiFetch('/generate', {
-        method: 'POST',
-        body: storyChunkBody(draft, text, profileId, speed, profiles),
+      const response = await postGenerate(
+        storyChunkBody(draft, text, profileId, speed, profiles),
         signal,
-      });
+      );
       return response.blob();
     },
   };

@@ -2404,7 +2404,8 @@
     "clone": "Klonowanie głosu",
     "primary": "Nawigacja główna",
     "dictation": "Dyktowanie",
-    "calls": "Połączenia"
+    "calls": "Połączenia",
+    "queue": "Kolejka"
   },
   "profiles": {
     "locked": "Głos zablokowany! Tożsamość jest teraz spójna we wszystkich pokoleniach.",
@@ -4564,5 +4565,36 @@
     "title": "Tylko do użytku niekomercyjnego",
     "body": "VoiceStudio nie jest przeznaczone do użytku komercyjnego. Nie używaj tej aplikacji do celów komercyjnych. Wybierz „Zgadzam się”, aby potwierdzić i kontynuować.",
     "agree": "Zgadzam się"
+  },
+  "queue": {
+    "title": "Kolejka",
+    "summary": "W toku: {{running}} · Oczekuje: {{waiting}} · Procesy: {{workers}}",
+    "loading": "Wczytywanie kolejki…",
+    "running": "W toku",
+    "waiting": "Oczekuje",
+    "recent": "Ostatnie",
+    "none_running": "Nic nie jest wykonywane.",
+    "none_waiting": "Nic nie oczekuje.",
+    "none_recent": "Brak ukończonych zadań.",
+    "steps": "Kroki: {{n}}",
+    "voice": "Głos: {{voice}}",
+    "chars": "Znaki: {{n}}",
+    "client": "Od {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "Aplikacja",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "W tle",
+    "state_starting": "Uruchamianie",
+    "state_waiting": "Oczekuje",
+    "state_running": "W toku",
+    "state_done": "Gotowe",
+    "state_failed": "Niepowodzenie",
+    "estimate_basis": "Szacunek na podstawie podobnych ukończonych zadań: {{n}}",
+    "estimate_first": "Pierwszy szacunek: nie ukończono jeszcze podobnych zadań",
+    "starts_in": "start za ~{{time}}",
+    "takes_about": "potrwa ~{{time}}",
+    "elapsed": "upłynęło {{time}}",
+    "remaining": "zostało ~{{time}}"
   }
 }

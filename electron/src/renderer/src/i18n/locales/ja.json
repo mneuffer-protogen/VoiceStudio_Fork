@@ -2380,7 +2380,8 @@
     "clone": "音声クローン",
     "primary": "メインナビゲーション",
     "dictation": "音声入力",
-    "calls": "通話"
+    "calls": "通話",
+    "queue": "キュー"
   },
   "profiles": {
     "locked": "音声ロックされてる！アイデンティティはすべての世代にわたって一貫しています。",
@@ -4536,5 +4537,36 @@
     "title": "非営利目的のみ",
     "body": "VoiceStudioは商用利用できません。このアプリを商用目的で使用しないでください。確認して続行するには「同意する」を選択してください。",
     "agree": "同意する"
+  },
+  "queue": {
+    "title": "キュー",
+    "summary": "実行中: {{running}} · 待機中: {{waiting}} · ワーカー: {{workers}}",
+    "loading": "キューを読み込み中…",
+    "running": "実行中",
+    "waiting": "待機中",
+    "recent": "最近",
+    "none_running": "実行中の処理はありません。",
+    "none_waiting": "待機中の処理はありません。",
+    "none_recent": "完了した処理はまだありません。",
+    "steps": "ステップ: {{n}}",
+    "voice": "音声: {{voice}}",
+    "chars": "文字数: {{n}}",
+    "client": "送信元 {{client}}",
+    "http_status": "HTTP {{status}}",
+    "source_app": "アプリ",
+    "source_api": "API",
+    "source_mcp": "MCP",
+    "source_background": "バックグラウンド",
+    "state_starting": "開始中",
+    "state_waiting": "待機中",
+    "state_running": "実行中",
+    "state_done": "完了",
+    "state_failed": "失敗",
+    "estimate_basis": "類似の完了済み処理からの推定: {{n}}",
+    "estimate_first": "初回の推定: 類似の処理はまだ完了していません",
+    "starts_in": "約{{time}}後に開始",
+    "takes_about": "約{{time}}かかります",
+    "elapsed": "{{time}}経過",
+    "remaining": "残り約{{time}}"
   }
 }
