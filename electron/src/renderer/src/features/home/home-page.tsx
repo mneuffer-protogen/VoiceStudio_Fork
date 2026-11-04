@@ -46,26 +46,23 @@ interface ExportRecord {
   mode?: string;
 }
 
-const iconTones: Record<string, string> = {
-  '/clone':
-    'bg-sky-100 text-sky-700 ring-sky-300/60 dark:bg-sky-400/15 dark:text-sky-300 dark:ring-sky-300/30',
-  '/design':
-    'bg-violet-100 text-violet-700 ring-violet-300/60 dark:bg-violet-400/15 dark:text-violet-300 dark:ring-violet-300/30',
-  '/dub':
-    'bg-teal-100 text-teal-700 ring-teal-300/60 dark:bg-teal-400/15 dark:text-teal-300 dark:ring-teal-300/30',
-  '/stories':
-    'bg-rose-100 text-rose-700 ring-rose-300/60 dark:bg-rose-400/15 dark:text-rose-300 dark:ring-rose-300/30',
-  '/audiobook':
-    'bg-amber-100 text-amber-800 ring-amber-300/60 dark:bg-amber-400/15 dark:text-amber-200 dark:ring-amber-300/30',
-  '/gallery':
-    'bg-fuchsia-100 text-fuchsia-700 ring-fuchsia-300/60 dark:bg-fuchsia-400/15 dark:text-fuchsia-300 dark:ring-fuchsia-300/30',
-  '/transcriptions':
-    'bg-cyan-100 text-cyan-700 ring-cyan-300/60 dark:bg-cyan-400/15 dark:text-cyan-200 dark:ring-cyan-300/30',
-  '/workflows':
-    'bg-indigo-100 text-indigo-700 ring-indigo-300/60 dark:bg-indigo-400/15 dark:text-indigo-300 dark:ring-indigo-300/30',
-  '/tools':
-    'bg-slate-100 text-slate-700 ring-slate-300/60 dark:bg-slate-300/15 dark:text-slate-200 dark:ring-slate-300/30',
-};
+// One brand tone for every destination, as the ProtoGen shell does: soft green
+// tile, green glyph. Colour no longer competes with the cards' titles.
+const brandIconTone =
+  'bg-(--brand-accent-soft) text-(--brand-accent-text) ring-(--brand-accent-line)';
+const iconTones: Record<string, string> = Object.fromEntries(
+  [
+    '/clone',
+    '/design',
+    '/dub',
+    '/stories',
+    '/audiobook',
+    '/gallery',
+    '/transcriptions',
+    '/workflows',
+    '/tools',
+  ].map((route) => [route, brandIconTone]),
+);
 
 export function HomePage() {
   const { t } = useTranslation();
@@ -190,13 +187,14 @@ export function HomePage() {
   return (
     <div className="flex h-full min-h-0 flex-col">
       <WorkspaceHeader>
-        <h1 className="text-sm font-medium">{t('nav.home')}</h1>
+        <h1 className="text-base font-semibold">{t('nav.home')}</h1>
         <Link
           to="/projects"
-          className="ml-auto inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground"
+          aria-label={t('projects.title')}
+          className="ml-auto inline-flex min-h-8 items-center gap-2 rounded-md px-1 text-sm text-muted-foreground hover:text-foreground"
         >
-          <FolderOpenIcon className="size-4" />
-          {t('projects.title')}
+          <FolderOpenIcon className="size-4" aria-hidden="true" />
+          <span className="hidden sm:inline">{t('projects.title')}</span>
         </Link>
       </WorkspaceHeader>
       <div className="min-h-0 flex-1 overflow-y-auto">
@@ -207,7 +205,7 @@ export function HomePage() {
                 src={brandArtwork}
                 alt=""
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-y-0 right-0 -z-10 h-full w-1/2 object-cover object-right opacity-25 [mask-image:linear-gradient(90deg,transparent,black)]"
+                className="pointer-events-none absolute inset-y-0 right-0 -z-10 h-full w-1/2 object-cover object-right opacity-15 grayscale [mask-image:linear-gradient(90deg,transparent,black)]"
               />
               <div className="home-heading-row">
                 <div className="home-heading-copy">
@@ -303,14 +301,13 @@ export function HomePage() {
 
           {exports.length > 0 && (
             <section className="mt-8">
-              <div className="mb-2 flex items-center justify-between px-1">
-                <h2 className="flex items-center gap-2 text-sm font-medium">
-                  <FolderOpenIcon className="size-4 text-muted-foreground" />
+              <div className="mb-3 flex items-center justify-between px-1">
+                <h2 className="section-title">
                   {t('projects.exports')}
                 </h2>
                 <Link
                   to="/projects"
-                  className="text-xs text-muted-foreground hover:text-foreground"
+                  className="text-sm font-medium text-(--brand-accent-text) hover:underline hover:underline-offset-3"
                 >
                   {t('projects.all')}
                 </Link>
@@ -320,7 +317,7 @@ export function HomePage() {
                   <Link
                     key={record.id}
                     to="/projects"
-                    className="group flex min-w-0 items-center gap-3 rounded-xl border border-border/50 bg-card/20 px-3 py-2.5 outline-none transition-colors hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring"
+                    className="group flex min-w-0 items-center gap-3 rounded-[14px] border border-border bg-card px-3 py-2.5 shadow-(--brand-shadow) outline-none transition-colors hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <FolderOpenIcon className="size-4 shrink-0 text-primary" />
                     <span className="min-w-0 flex-1">
@@ -344,14 +341,13 @@ export function HomePage() {
 
           {recentProjects.length > 0 && (
             <section className="mt-8">
-              <div className="mb-2 flex items-center justify-between px-1">
-                <h2 className="flex items-center gap-2 text-sm font-medium">
-                  <FolderOpenIcon className="size-4 text-muted-foreground" />
+              <div className="mb-3 flex items-center justify-between px-1">
+                <h2 className="section-title">
                   {t('projects.title')}
                 </h2>
                 <Link
                   to="/projects"
-                  className="text-xs text-muted-foreground hover:text-foreground"
+                  className="text-sm font-medium text-(--brand-accent-text) hover:underline hover:underline-offset-3"
                 >
                   {t('projects.all')}
                 </Link>
@@ -372,7 +368,7 @@ export function HomePage() {
                     <button
                       key={item.kind + ':' + item.project.id}
                       type="button"
-                      className="group flex min-w-0 items-center gap-3 rounded-xl border border-border/50 bg-card/20 px-3 py-2.5 text-left outline-none transition-colors hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring"
+                      className="group flex min-w-0 items-center gap-3 rounded-[14px] border border-border bg-card px-3 py-2.5 shadow-(--brand-shadow) text-left outline-none transition-colors hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring"
                       onClick={() => void openProject(item)}
                     >
                       <Icon className="size-4 shrink-0 text-primary" />
@@ -396,26 +392,31 @@ export function HomePage() {
             <section className="mt-8">
               {profiles.length > 0 && (
                 <div>
-                  <div className="mb-2 flex items-center justify-between px-1">
-                    <h2 className="text-sm font-medium">{t('clone.saved_profiles')}</h2>
+                  <div className="mb-3 flex items-center justify-between px-1">
+                    <h2 className="section-title">{t('clone.saved_profiles')}</h2>
                     <Link
                       to="/projects"
-                      className="text-xs text-muted-foreground hover:text-foreground"
+                      className="text-sm font-medium text-(--brand-accent-text) hover:underline hover:underline-offset-3"
                     >
                       {t('projects.all')}
                     </Link>
                   </div>
-                  <div className="grid gap-1 rounded-2xl border border-border/70 bg-card/30 p-2 @3xl:grid-cols-2">
+                  <div className="grid gap-1 rounded-[14px] border border-border bg-card p-2 shadow-(--brand-shadow)">
                     {profiles.slice(0, 4).map((profile) => (
                       <div
                         key={profile.id}
-                        className="flex min-w-0 items-center gap-3 rounded-xl px-2.5 py-2 hover:bg-accent/50"
+                        className="flex min-w-0 items-center gap-3 rounded-lg px-3 py-2 hover:bg-accent/60"
                       >
                         <ProfileAvatar name={profile.name} imageUrl={profile.image_url} />
                         <span className="min-w-0 flex-1 truncate text-sm font-medium">
                           {profile.name}
                         </span>
-                        <Button size="sm" variant="ghost" onClick={() => void useProfile(profile)}>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="border-primary/60 text-primary hover:text-primary dark:text-(--brand-accent-text)"
+                          onClick={() => void useProfile(profile)}
+                        >
                           {t('clone.select_profile')}
                         </Button>
                       </div>

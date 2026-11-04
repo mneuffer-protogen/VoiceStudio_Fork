@@ -95,10 +95,10 @@ export function AppearanceSettings() {
             >
               <span
                 style={{
-                  fontFamily: font === 'inter' ? '"Inter Variable", sans-serif' : 'system-ui',
+                  fontFamily: font === 'inter' ? '"Noto Sans Variable", sans-serif' : 'system-ui',
                 }}
               >
-                {font === 'inter' ? 'Inter' : t('preferences.audio_tools_origin_system')}
+                {font === 'inter' ? 'Noto Sans' : t('preferences.audio_tools_origin_system')}
               </span>
             </Button>
           ))}

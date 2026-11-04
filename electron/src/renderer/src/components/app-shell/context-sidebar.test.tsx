@@ -42,3 +42,25 @@ it('reopens a collapsed library pane when a library shortcut opens it', () => {
   fireEvent.click(screen.getByRole('button', { name: 'paneActions.collapse' }));
   expect(setWorkspace).toHaveBeenCalledWith({ libraryOpen: false });
 });
+
+it('starts folded at phone width and opens on request without changing the desktop preference', () => {
+  const matchMedia = window.matchMedia;
+  window.matchMedia = ((query: string) => ({
+    matches: query === '(max-width: 640px)',
+    media: query,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+  })) as unknown as typeof window.matchMedia;
+  try {
+    workspace.libraryOpen = true;
+    render(<ContextSidebar />);
+    const pane = () => document.querySelector('[data-slot="secondary-sidebar"]');
+    expect(pane()).toHaveAttribute('data-collapsed', 'true');
+
+    fireEvent.click(screen.getByRole('button', { name: 'nav.voice' }));
+    expect(pane()).not.toHaveAttribute('data-collapsed');
+    expect(setWorkspace).not.toHaveBeenCalled();
+  } finally {
+    window.matchMedia = matchMedia;
+  }
+});

@@ -28,7 +28,7 @@ function apply() {
   document.documentElement.style.fontSize = `${current.scale}%`;
   document.documentElement.style.setProperty(
     '--font-sans',
-    `${current.font === 'inter' ? '"Inter Variable", ' : ''}-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`,
+    `${current.font === 'inter' ? '"Noto Sans Variable", "Noto Sans", ' : ''}-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`,
   );
 }
 apply();
