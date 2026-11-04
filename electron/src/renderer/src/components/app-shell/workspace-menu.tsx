@@ -126,7 +126,7 @@ function NavigationLink({
       )}
       activeProps={{
         className:
-          'bg-sidebar-accent/80 text-sidebar-foreground shadow-sm ring-1 ring-inset ring-sidebar-border/60',
+          'bg-(--brand-accent-soft) font-medium text-(--brand-accent-text) hover:bg-(--brand-accent-soft)',
         'aria-current': 'page',
       }}
     >

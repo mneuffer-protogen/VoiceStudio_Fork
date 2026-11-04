@@ -17,7 +17,7 @@
 
 .home-heading-copy {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   flex: 1 1 280px;
 }
 
@@ -353,13 +353,14 @@
 }
 
 .home-destination {
-  --home-accent: #79b9ee;
+  --home-accent: var(--brand-teal);
   position: relative;
   isolation: isolate;
   min-width: 0;
-  border: 1px solid color-mix(in srgb, var(--border) 85%, var(--foreground) 6%);
-  border-radius: 17px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
   background: var(--card);
+  box-shadow: var(--brand-shadow);
   outline: none;
   transition:
     border-color 180ms ease,
@@ -367,12 +368,6 @@
     box-shadow 180ms ease;
 }
 
-.home-destination[data-destination='/design'] {
-  --home-accent: #b8a1ee;
-}
-.home-destination[data-destination='/dub'] {
-  --home-accent: #72cebd;
-}
 
 .home-destination--primary {
   display: flex;
@@ -595,7 +590,7 @@
   align-items: center;
   gap: 13px;
   padding: 17px 15px;
-  background: color-mix(in srgb, var(--card) 70%, var(--background));
+  background: var(--card);
 }
 
 .home-destination--secondary .home-destination-copy {

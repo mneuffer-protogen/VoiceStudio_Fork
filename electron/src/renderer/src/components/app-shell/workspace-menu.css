@@ -1,59 +1,11 @@
-.workspace-nav-icon[data-tone='voice'] {
-  --workspace-icon-accent: var(--color-fuchsia-500);
-}
-.workspace-nav-icon[data-tone='clone'] {
-  --workspace-icon-accent: var(--color-violet-500);
-}
-.workspace-nav-icon[data-tone='design'] {
-  --workspace-icon-accent: var(--color-pink-500);
-}
-.workspace-nav-icon[data-tone='personas'] {
-  --workspace-icon-accent: var(--color-cyan-500);
-}
-.workspace-nav-icon[data-tone='gallery'] {
-  --workspace-icon-accent: var(--color-emerald-500);
-}
-.workspace-nav-icon[data-tone='stories-group'] {
-  --workspace-icon-accent: var(--color-blue-500);
-}
-.workspace-nav-icon[data-tone='stories'] {
-  --workspace-icon-accent: var(--color-sky-500);
-}
-.workspace-nav-icon[data-tone='audiobook'] {
-  --workspace-icon-accent: var(--color-amber-500);
-}
-.workspace-nav-icon[data-tone='dubbing-group'] {
-  --workspace-icon-accent: var(--color-rose-500);
-}
-.workspace-nav-icon[data-tone='dub'] {
-  --workspace-icon-accent: var(--color-purple-500);
-}
-.workspace-nav-icon[data-tone='batch'] {
-  --workspace-icon-accent: var(--color-orange-500);
-}
-.workspace-nav-icon[data-tone='transcriptions'] {
-  --workspace-icon-accent: var(--color-teal-500);
-}
-.workspace-nav-icon[data-tone='calls'] {
-  --workspace-icon-accent: var(--color-indigo-500);
-}
-.workspace-nav-icon[data-tone='projects'] {
-  --workspace-icon-accent: var(--color-lime-500);
-}
-.workspace-nav-icon[data-tone='tools'] {
-  --workspace-icon-accent: var(--color-yellow-500);
-}
-.workspace-nav-icon[data-tone='integrations'] {
-  --workspace-icon-accent: var(--color-green-500);
-}
-.workspace-nav-icon[data-tone='settings'] {
-  --workspace-icon-accent: var(--color-red-500);
+/* One brand accent for every destination (ProtoGen nav: green, never a rainbow). */
+.workspace-nav-icon {
+  --workspace-icon-accent: var(--brand-green);
 }
 
 .workspace-nav-item:is(:hover, :focus-visible, [aria-current='page'], [data-active='true'])
   .workspace-nav-icon {
-  color: color-mix(in oklab, var(--workspace-icon-accent) 78%, var(--foreground));
-  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--workspace-icon-accent) 32%, transparent));
+  color: var(--brand-accent-text);
 }
 
 .workspace-nav-item:is(:hover, :focus-visible) .workspace-nav-icon[data-motion='pulse'] {

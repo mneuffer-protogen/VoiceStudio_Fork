@@ -1,7 +1,8 @@
 # README and store media
 
-These images use the current Electron renderer in its **default dark palette**,
-with the normal Inter font, scale and appearance. The surrounding waveform
+These images were captured from the Electron renderer before the ProtoGen
+restyle, in its then-default dark palette with the Inter font, at the normal
+scale and appearance. They still show the current layout. The surrounding waveform
 backdrop, frame and scene labels are presentation artwork; the UI inside the
 frame is a browser screenshot. No app theme, layout or product defaults are
 changed. The source commit, capture date, dimensions and file sizes are recorded
