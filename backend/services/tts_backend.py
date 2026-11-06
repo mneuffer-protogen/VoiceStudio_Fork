@@ -3831,6 +3831,13 @@ _LAZY_REGISTRY: dict[str, tuple[str, str]] = {
     "audiocpp-dots": ("engines.audiocpp", "AudioCPPDotsBackend"),
     # Community CosyVoice.cpp GGUF server, explicitly installed and isolated.
     "cosyvoice-gguf": ("engines.cosyvoice_gguf", "CosyVoiceGGUFBackend"),
+    # Kokoro-82M on onnxruntime: fast CPU preset-voice narration on every OS
+    # (the mlx-audio Kokoro path is Apple-Silicon only). Weights pinned by
+    # SHA-256 from the kokoro-onnx GitHub release, fetched on first use.
+    "kokoro-onnx": ("engines.kokoro_onnx", "KokoroOnnxBackend"),
+    # Gradium Phonon 31m through the Rust `ptts` runtime: Apache-2.0 English
+    # preset voices, CPU-first. Opt-in via `uv sync --extra phonon`.
+    "phonon": ("engines.phonon", "PhononBackend"),
 }
 
 
@@ -3937,6 +3944,8 @@ _INSTALL_HINTS: dict[str, str] = {
     "confucius4-tts":"git clone netease-youdao/Confucius4-TTS + set OMNIVOICE_CONFUCIUS4_TTS_DIR  (own Python 3.10 venv; 14-lang cross-lingual zero-shot clone; ~5 GB weights auto-download; CUDA/ROCm/XPU/NPU/CPU, no MPS; Apache-2.0)",
     "audiocpp":     "download the matching audio.cpp v0.7.4 prebuilt + set OMNIVOICE_AUDIOCPP_BIN, then explicitly install Breeze-TTS-2 in Model Catalogue → Models  (native CPU/Vulkan/CUDA/Metal GGUF server, no Python; en+zh clone+design; ~4.73 GiB; weights research/non-commercial only)",
     "audiocpp-dots": "download the matching audio.cpp v0.7.4 prebuilt (Model Catalogue installs it) + explicitly install dots.tts SOAR in Model Catalogue → Models  (native CPU/Vulkan/CUDA/Metal GGUF on Windows, macOS and Linux; multilingual voice cloning; ~3 GB; Apache-2.0)",
+    "kokoro-onnx":   "No extra install (onnxruntime + espeak-ng wheels already bundled); ~350 MB of Apache-2.0 weights download from GitHub on first use. CPU-only, 54 preset voices, 8 languages.",
+    "phonon":        "uv sync --extra phonon  (Rust ptts runtime, no PyTorch; Phonon 31m Apache-2.0 English model ~70 MB from Hugging Face on first use; 37 preset voices, CPU)",
     "cosyvoice-gguf": "Build Lourdle/cosyvoice.cpp at the documented pinned revision with Vulkan enabled; set OMNIVOICE_COSYVOICE_GGUF_DIR and install its GGUF/ONNX model assets from Model Catalogue (native Vulkan/CPU; no automatic runtime download).",
 }
 
@@ -3987,6 +3996,8 @@ _ENGINE_DOCS: dict[str, str] = {
     "audiocpp":             "docs/engines/audio-cpp.md",
     "audiocpp-dots":        "docs/engines/audio-cpp.md",
     "cosyvoice-gguf":       "docs/engines/cosyvoice-gguf.md",
+    "kokoro-onnx":          "docs/engines/kokoro-onnx.md",
+    "phonon":               "docs/engines/phonon.md",
 }
 
 

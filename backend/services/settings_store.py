@@ -13,6 +13,7 @@ Public API (consumed by `token_resolver.py`):
 from __future__ import annotations
 
 import logging
+import os
 import sqlite3
 import time
 from typing import Optional
@@ -470,9 +471,23 @@ def get_license_accepted(engine_id: str) -> bool:
     read failure, or any non-``"1"`` value all return False so the
     callsite (``Supertonic3Backend.is_available()``) defaults to safe.
     """
+    if engine_id in operator_accepted_licenses():
+        return True
     key = _license_key(engine_id)
     raw = get_text(key, default="0")
     return raw == "1"
+
+
+def operator_accepted_licenses() -> frozenset[str]:
+    """Engine ids whose terms the server operator accepted for everyone.
+
+    A headless deployment has no first user to click Accept, so the person
+    who runs the server can accept on its behalf with a comma-separated
+    ``OMNIVOICE_ACCEPTED_ENGINE_LICENSES`` (e.g. ``supertonic3``). Read at
+    call time; unset or blank means nobody accepted, the safe default.
+    """
+    raw = os.environ.get("OMNIVOICE_ACCEPTED_ENGINE_LICENSES", "")
+    return frozenset(part.strip() for part in raw.split(",") if part.strip())
 
 
 def set_license_accepted(engine_id: str, accepted: bool) -> None:

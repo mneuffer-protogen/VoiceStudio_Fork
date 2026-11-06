@@ -31,6 +31,11 @@ crashes and cold init never block the rest of VoiceStudio.
    unavailable until you review and accept in **Model Catalogue →
    Supertonic-3**.
 
+   On a headless server with no one to click Accept, whoever runs the server
+   can accept for it with `OMNIVOICE_ACCEPTED_ENGINE_LICENSES=supertonic3`
+   (comma-separated engine ids; `pockettts` works the same way). Only set it
+   after reading the license yourself.
+
 3. Select the engine via **Model Catalogue** (TTS tab → **Use**) or
    `OMNIVOICE_TTS_BACKEND=supertonic3`.
 

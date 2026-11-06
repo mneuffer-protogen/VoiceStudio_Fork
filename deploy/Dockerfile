@@ -134,9 +134,15 @@ COPY deploy/uv-overrides.txt ./deploy/uv-overrides.txt
 # --override: `[tool.uv] override-dependencies` lifts caps that block security
 # releases (gradio's `pillow<13`), but `uv pip install` applies it only when run
 # from the project directory with a recent uv; pass it explicitly (#3275).
+#
+# OPTIONAL_EXTRAS: CPU-only engines baked into the image so a GPU-less server
+# (e.g. Railway) can use them without the in-app one-click installer.
+# supertonic = Supertonic-3 (31 langs), phonon = Phonon 31m via ptts. Both are
+# small, torch-free wheels. Build with OPTIONAL_EXTRAS="" to leave them out.
+ARG OPTIONAL_EXTRAS="supertonic,phonon"
 RUN uv pip install --python "$(command -v python3)" --no-cache \
     --constraint deploy/torch-constraints.txt \
-    --override deploy/uv-overrides.txt .
+    --override deploy/uv-overrides.txt ".${OPTIONAL_EXTRAS:+[${OPTIONAL_EXTRAS}]}"
 
 # Guard: every security override must be what the image actually installed.
 RUN python3 -c "from importlib.metadata import version; from packaging.requirements import Requirement; \

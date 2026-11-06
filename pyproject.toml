@@ -243,6 +243,12 @@ supertonic = [
 # PocketTTS opt-in engine. Keep the SDK pinned: its model-loading and voice
 # APIs are the sidecar wire contract. The model weights remain an explicit
 # user download after the Hugging Face access conditions are accepted.
+# Phonon (Gradium) opt-in engine: a self-contained Rust runtime wheel (numpy is
+# its only dependency) with wheels for macOS arm64/x86_64, Linux x86_64/aarch64
+# and Windows x64/arm64. The default Phonon 31m model is Apache-2.0.
+phonon = [
+    "ptts==0.6.0",
+]
 pockettts = [
     # pocket-tts requires torch>=2.5; PyTorch no longer publishes macOS x86_64
     # wheels at those versions. Keep the opt-in extra installable everywhere,
