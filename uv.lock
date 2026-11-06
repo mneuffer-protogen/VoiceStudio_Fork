@@ -4140,6 +4140,9 @@ eval = [
     { name = "zhconv" },
     { name = "zhon" },
 ]
+phonon = [
+    { name = "ptts" },
+]
 pockettts = [
     { name = "pocket-tts", marker = "platform_machine != 'x86_64' or sys_platform != 'darwin' or (extra == 'group-9-omnivoice-cpu' and extra == 'group-9-omnivoice-cuda')" },
 ]
@@ -4213,6 +4216,7 @@ requires-dist = [
     { name = "pocket-tts", marker = "(platform_machine != 'x86_64' and extra == 'pockettts') or (sys_platform != 'darwin' and extra == 'pockettts')", specifier = "==2.1.0" },
     { name = "posthog", specifier = ">=3.7" },
     { name = "psutil", specifier = ">=7.2.2" },
+    { name = "ptts", marker = "extra == 'phonon'", specifier = "==0.6.0" },
     { name = "pyannote-audio", specifier = ">=3.3.2,<4.0" },
     { name = "pydub" },
     { name = "pypdf", specifier = ">=6.19.0" },
@@ -4245,7 +4249,7 @@ requires-dist = [
     { name = "zhconv", marker = "extra == 'eval'" },
     { name = "zhon", marker = "extra == 'eval'" },
 ]
-provides-extras = ["eval", "ui", "supertonic", "pockettts"]
+provides-extras = ["eval", "ui", "supertonic", "phonon", "pockettts"]
 
 [package.metadata.requires-dev]
 cpu = [
@@ -4948,6 +4952,26 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/04/78/0acd37ca84ce3ddffaa92ef0f571e073faa6d8ff1f0559ab1272188ea2be/psutil-7.2.2-cp36-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:b58fabe35e80b264a4e3bb23e6b96f9e45a3df7fb7eed419ac0e5947c61e47cc", size = 148266, upload-time = "2026-01-28T18:15:31.597Z" },
     { url = "https://files.pythonhosted.org/packages/b4/90/e2159492b5426be0c1fef7acba807a03511f97c5f86b3caeda6ad92351a7/psutil-7.2.2-cp37-abi3-win_amd64.whl", hash = "sha256:eb7e81434c8d223ec4a219b5fc1c47d0417b12be7ea866e24fb5ad6e84b3d988", size = 137737, upload-time = "2026-01-28T18:15:33.849Z" },
     { url = "https://files.pythonhosted.org/packages/8c/c7/7bb2e321574b10df20cbde462a94e2b71d05f9bbda251ef27d104668306a/psutil-7.2.2-cp37-abi3-win_arm64.whl", hash = "sha256:8c233660f575a5a89e6d4cb65d9f938126312bca76d8fe087b947b3a1aaac9ee", size = 134617, upload-time = "2026-01-28T18:15:36.514Z" },
+]
+
+[[package]]
+name = "ptts"
+version = "0.6.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy", version = "2.0.2", source = { registry = "https://pypi.org/simple" }, marker = "(python_full_version == '3.12.*' and sys_platform == 'linux') or (python_full_version == '3.12.*' and sys_platform == 'win32') or (sys_platform != 'linux' and sys_platform != 'win32' and extra == 'group-9-omnivoice-cpu' and extra == 'group-9-omnivoice-cuda') or (sys_platform == 'linux' and extra == 'group-9-omnivoice-cpu' and extra == 'group-9-omnivoice-cuda') or (sys_platform == 'win32' and extra == 'group-9-omnivoice-cpu' and extra == 'group-9-omnivoice-cuda')" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "(python_full_version != '3.12.*' and sys_platform == 'linux') or (python_full_version != '3.12.*' and sys_platform == 'win32') or (sys_platform != 'linux' and sys_platform != 'win32') or (sys_platform == 'linux' and extra == 'group-9-omnivoice-cpu' and extra == 'group-9-omnivoice-cuda') or (sys_platform == 'win32' and extra == 'group-9-omnivoice-cpu' and extra == 'group-9-omnivoice-cuda')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/12/c9/5bf790a2f345ea839afd156a2ee9c294c3556eea9ad75521db8dc00ee95d/ptts-0.6.0.tar.gz", hash = "sha256:5fcddd13b99a97d704e5b48ff29673429fe279cb8a358e7c61093275f50f4582", size = 308528, upload-time = "2026-10-30T11:24:43.487Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e0/da/a8fd38fbea256613dc5493626c671bc6699a7522b86063563438ae928a74/ptts-0.6.0-cp39-abi3-macosx_10_12_x86_64.whl", hash = "sha256:f956979b39d9471f69d6e1dcde5c4ec1bc5b4f77379c8b3c39919b0cee44140b", size = 6917172, upload-time = "2026-10-30T11:24:31.437Z" },
+    { url = "https://files.pythonhosted.org/packages/84/01/267cffc824f868d59af59d9251456cf8f3b17a63f1b4012cde6afacf2fc6/ptts-0.6.0-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:28ca52dceb36e128b040dc6d566975e01a5fe4f8b297d4d87165ec51c65be88c", size = 6855436, upload-time = "2026-10-30T11:24:33.229Z" },
+    { url = "https://files.pythonhosted.org/packages/4c/49/94af8a54ac3da90adf633cc6bb1c9221cbe901b104a932279dac25f36e06/ptts-0.6.0-cp39-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:2dcfc6f2e9775f62536396b7018ee2b390998064b63b7cd1291c931d9e8b3cf5", size = 6820954, upload-time = "2026-10-30T11:24:34.658Z" },
+    { url = "https://files.pythonhosted.org/packages/62/5f/2c68115af9499a1c8d4395850eb758efd95aca20bc351c8d969962a39c53/ptts-0.6.0-cp39-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:6efb197e73af258e278e90fcc771f36022c5123e9ecca2fca50ae90472caa60c", size = 7483513, upload-time = "2026-10-30T11:24:36.458Z" },
+    { url = "https://files.pythonhosted.org/packages/54/25/8cbda25e376556ddb261687b3a616d572a13055ae2feb16d4f176027d335/ptts-0.6.0-cp39-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:2cd86e007eb4af0eb80802300d5b96939d84bf01e6cee05e93be0d38c60f1448", size = 6999693, upload-time = "2026-10-30T11:24:37.812Z" },
+    { url = "https://files.pythonhosted.org/packages/52/06/c18550c9ab5a14fad86234629687d5f10a2544f356ee3e7abf1a95e9befb/ptts-0.6.0-cp39-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:4510a3c2269b31708843ea64cc5144deea4fd299afa5cf686bf2f9c45d0aa18f", size = 7514974, upload-time = "2026-10-30T11:24:39.035Z" },
+    { url = "https://files.pythonhosted.org/packages/c7/30/608151c24f51553408bdb3a5458dcf34b400577c2fdf6db8cba647edb659/ptts-0.6.0-cp39-abi3-win_amd64.whl", hash = "sha256:786d5222af8764133ee52c82a8088cce5d2f0cf1b8de05e10f62670327aec0da", size = 6859999, upload-time = "2026-10-30T11:24:40.660Z" },
+    { url = "https://files.pythonhosted.org/packages/c8/06/c471eb730a3cc75bd6c2b0d785abbfd6c6d0d5b592f590c93953ce602951/ptts-0.6.0-cp39-abi3-win_arm64.whl", hash = "sha256:9d319ffb543d2caacc8d6cfa2f247034854b19eea6c68b9f4222ee9fcd657e3e", size = 6578106, upload-time = "2026-10-30T11:24:42.116Z" },
 ]
 
 [[package]]

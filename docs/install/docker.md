@@ -451,6 +451,22 @@ Everything else is unchanged:
 > this behind a reverse proxy on the host unless that proxy is listed in
 > `FORWARDED_ALLOW_IPS`.
 
+## CPU-only engines in the image
+
+Images built from `deploy/Dockerfile` include three fast CPU engines next to
+the default OmniVoice: [Kokoro-82M](../engines/kokoro-onnx.md),
+[Phonon 31m](../engines/phonon.md) and [Supertonic-3](../engines/supertonic3.md).
+None of them clones a voice; they suit stock-voice narration on servers with
+no GPU. Their weights download on first use. Supertonic-3 also needs its
+license accepted, which a headless server can do with:
+
+| Variable | Default | Effect |
+|----------|---------|--------|
+| `OMNIVOICE_ACCEPTED_ENGINE_LICENSES` | unset | Comma-separated engine ids whose license terms the operator accepts for every user, e.g. `supertonic3`. Read the license first. |
+
+Build with `--build-arg OPTIONAL_EXTRAS=""` to leave the Supertonic-3 and
+Phonon packages out of the image.
+
 ## Hosts that sleep when idle (Railway Serverless and similar)
 
 Scale-to-zero hosts such as Railway Serverless put a container to sleep after
